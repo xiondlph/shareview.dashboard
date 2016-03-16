@@ -1,4 +1,8 @@
 .architect
-bootstrap.json
+.sencha
+bootstrap.*
+workspace.json
+build.xml
+example
 build/
 ext/
