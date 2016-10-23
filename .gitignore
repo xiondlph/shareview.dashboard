@@ -1,8 +1,5 @@
+.idea
 .architect
-.sencha
-bootstrap.*
-workspace.json
-build.xml
-example
+bootstrap.json
 build/
 ext/
