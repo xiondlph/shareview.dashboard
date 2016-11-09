@@ -65,28 +65,28 @@ Ext.define('Admin.view.main.Main', {
                 {
                     iconCls:'x-fa fa-search',
                     ui: 'header',
-                    href: '#dashboard',
+                    href: '#searchresults',
                     hrefTarget: '_self',
                     tooltip: 'See latest search'
                 },
                 {
                     iconCls:'x-fa fa-envelope',
                     ui: 'header',
-                    href: '#dashboard',
+                    href: '#email',
                     hrefTarget: '_self',
                     tooltip: 'Check your email'
                 },
                 {
                     iconCls:'x-fa fa-question',
                     ui: 'header',
-                    href: '#dashboard',
+                    href: '#faq',
                     hrefTarget: '_self',
                     tooltip: 'Help / FAQ\'s'
                 },
                 {
                     iconCls:'x-fa fa-th-large',
                     ui: 'header',
-                    href: '#dashboard',
+                    href: '#profile',
                     hrefTarget: '_self',
                     tooltip: 'See your profile'
                 },
