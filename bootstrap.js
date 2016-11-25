@@ -1,5 +1,5 @@
 var Ext = Ext || {};
-Ext.manifest = Ext.manifest || "modern.json";
+Ext.manifest = Ext.manifest || "classic.json";
 // @tag core
 // @define Ext.Boot
 
@@ -2126,6 +2126,7 @@ Ext.Microloader = Ext.Microloader || (function () {
                             Boot.load(Manifest.url);
                         }
                         else {
+                            Manifest.url = url;
                             Boot.fetch(Microloader.applyCacheBuster(url), function(result) {
                                 Microloader.setManifest(result.content);
                             });

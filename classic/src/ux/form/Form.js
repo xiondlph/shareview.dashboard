@@ -2,18 +2,9 @@ Ext.define('Admin.ux.form.Form',{
 	extend: 'Ext.form.Panel',
 	xtype: 'admin.form',
 
-	plugins: 'responsive',
+    responsiveCls: 'big-50 small-100',
 
-	responsiveConfig: {
-		'width > 800': {
-			width: '40%'
-		},
-
-		'width <= 800': {
-			width: '90%'
-		}
-	},
-
+    bodyPadding: 10,
 	defaultType: 'textfield',
 	defaults: {
 		submitEmptyText: false,

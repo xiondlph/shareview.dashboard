@@ -1,0 +1,18 @@
+/// Иконки триггеров полей формы
+.trigger-question {
+&:before {
+        content: "\f128" !important;
+    }
+}
+
+.trigger-clipboard {
+&:before {
+        content: "\f0ea" !important;
+    }
+}
+
+.trigger-payment {
+&:before {
+        content: "\f09d" !important;
+    }
+}

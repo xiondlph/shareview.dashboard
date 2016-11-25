@@ -24,14 +24,14 @@ Ext.define('Admin.view.main.Main', {
     items: [
         {
             xtype: 'toolbar',
-            cls: 'sencha-dash-dash-headerbar shadow',
+            cls: 'shareview-headerbar shadow',
             height: 64,
             itemId: 'headerBar',
             items: [
                 {
                     xtype: 'component',
                     reference: 'senchaLogo',
-                    cls: 'sencha-logo',
+                    cls: 'shareview-logo',
                     html: '<div class="main-logo"><img src="resources/images/company-logo.png">Sencha</div>',
                     width: 250
                 },
@@ -45,7 +45,9 @@ Ext.define('Admin.view.main.Main', {
                 '->',
                 {
                     xtype: 'tbtext',
-                    text: 'Goff Smith',
+                    bind: {
+                        text: '{profile.email}'
+                    },
                     cls: 'top-user-name'
                 },
                 {

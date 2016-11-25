@@ -3,6 +3,12 @@ Ext.define('Admin.view.main.MainModel', {
     alias: 'viewmodel.main',
 
     data: {
-        currentView: null
+        currentView: null,
+        profile: {
+            email: 'admin@shareview.ru',
+            requests: '0',
+            address: '127.0.0.1',
+            key: 'fff'
+        }
     }
 });
