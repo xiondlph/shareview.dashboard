@@ -137,35 +137,43 @@ Ext.define('Admin.view.main.MainController', {
 		}
 	},
 
-	onMainViewRender:function() {
+	onMainViewRender: function() {
 		if (!window.location.hash) {
 			this.redirectTo("dashboard");
 		}
 	},
 
-	onRouteChange:function(id){
+	onRouteChange: function(id){
 		this.setCurrentView(id);
 	},
 
-	onSearchRouteChange: function () {
-		this.setCurrentView('searchresults');
-	},
+	preConfig: function () {
+		var me = this;
 
-	onSwitchToModernConfirmed: function (choice) {
-		if (choice === 'yes') {
-			var s = location.search;
-
-			// Strip "?classic" or "&classic" with optionally more "&foo" tokens
-			// following and ensure we don't start with "?".
-			s = s.replace(/(^\?|&)classic($|&)/, '').replace(/^\?/, '');
-
-			// Add "?modern&" before the remaining tokens and strip & if there are
-			// none.
-			location.search = ('?modern&' + s).replace(/&$/, '');
-		}
-	},
-
-	onEmailRouteChange: function () {
-		this.setCurrentView('email');
-	}
+        // Перехват ошибок аякс запросов
+        Ext.Ajax.on('requestexception', function(connection, response, options) {
+            if (response.status === 403) {
+            	if (me.lastView.xtype === 'login') {
+                    Ext.MessageBox.show({
+                        title: 'Ошибка',
+                        msg: 'Время сессии истекло!',
+                        buttons: Ext.MessageBox.OK,
+                        icon: Ext.MessageBox.ERROR,
+                        fn: function(){
+                            window.location.href="/admin/";
+                        }
+                    });
+				} else {
+            		me.redirectTo('login', true);
+				}
+            } else {
+                Ext.MessageBox.show({
+                    title: 'Ошибка',
+                    msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
+                    buttons: Ext.MessageBox.OK,
+                    icon: Ext.MessageBox.ERROR
+                });
+            }
+        }, this);
+    }
 });

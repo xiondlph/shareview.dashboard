@@ -13,7 +13,9 @@ Ext.define('Admin.Application', {
     ],
     
     launch: function () {
-        // TODO - Launch the application
+        var ctrl = this.getMainView().getController();
+
+        ctrl.preConfig();
     },
 
     onAppUpdate: function () {

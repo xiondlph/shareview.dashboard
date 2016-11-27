@@ -26,7 +26,7 @@ Ext.define('Admin.store.NavigationTree', {
 			{
 				text: 'Помощь',
 				iconCls: 'x-fa fa-question',
-				viewType: 'profile',
+				viewType: 'login',
 				leaf: true
 			}
 		]

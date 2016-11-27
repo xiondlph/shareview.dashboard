@@ -1,0 +1,62 @@
+.auth-locked-window{
+
+  .x-window-body {
+    background-image:url('images/lock-screen-background.jpg');
+    background-size:cover;
+    background-repeat:repeat;
+  }
+
+  &.x-window-default {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .auth-form {
+
+    .x-form-text-default, .x-placeholder-label-default {
+      padding: 15px;
+    }
+
+    .trigger-glyph-noop {
+      cursor:default;
+    }
+
+    .x-form-trigger {
+      text-align:right;
+      width:50px;
+    }
+
+    .auth-email-trigger,
+    .auth-password-trigger {
+      &:before {
+        top: 10px;
+        left:-18px;
+        position: relative;
+        color: $auth-form-trigger-color;
+        font-size: 30px;
+      }
+
+      &.password-trigger:before,
+      &.auth-password-trigger:before {
+        content: "\f023";
+      }
+      &.auth-email-trigger:before {
+        content: "\f007";
+      }
+      &.auth-envelope-trigger:before {
+        content: "\f0e0";
+      }
+    }
+
+    .link-forgot-password {
+      line-height:32px;
+      color: $base-color;
+      text-decoration:none;
+      margin-left:5px;
+      &:hover{
+        text-decoration:underline;
+      }
+    }
+  }
+}
