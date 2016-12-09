@@ -3,6 +3,67 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     alias: 'controller.dashboard-dashboard',
 
     boxReady: function (view) {
+        var ref         = this.getReferences(),
+            setting     = ref.setting,
+            info        = ref.info,
+            vm          = this.getViewModel(),
+            profile     = vm.get('profile');
+
+        vm.bind('{profile}', this.onProfileLoad, this, {deep: true});
+
+        if (!profile) {
+            setting.setLoading('Загрузка');
+            info.setLoading('Загрузка');
+        }
+
+        this.setToolTip();
+    },
+
+    onProfileLoad: function (rec) {
+        var ref         = this.getReferences(),
+            setting     = ref.setting;
+            info        = ref.info;
+
+        setting.loadRecord(rec);
+        setting.setLoading(false);
+        info.setLoading(false);
+    },
+
+    onSaveSettings: function (btn) {
+        var ref         = this.getReferences(),
+            form        = ref.setting,
+            record      = form.getRecord(),
+            fieldParams = form.getValues(false, true);
+
+        if (!form.isDirty()) {
+            return;
+        }
+
+        form.submit({
+            getParams: function () {
+                return Ext.apply({}, fieldParams);
+            },
+            success: function (form, action) {
+                record.set(fieldParams);
+                record.commit();
+                Ext.toast({
+                    html: 'Новые настройки сохранены',
+                    closeToolText: 'Закрыть',
+                    iconCls: 'x-fa fa-comments',
+                    align: 'br',
+                    closable: true
+                });
+            },
+            failure: function(form, action) {
+                if (action.result.exist) {
+                    ref.emailField.markInvalid('Пользователь с таким Email уже существует');
+                }
+            },
+            waitMsg: 'Сохранение'
+        });
+    },
+
+    setToolTip: function () {
         var ref = this.getReferences();
 
         Ext.create('Ext.tip.ToolTip', {
@@ -58,7 +119,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
                 tips.update('Скопировано!');
             }
         } catch (err) {
-            console.info('Cope failed');
+            console.info('Copy failed');
         }
     }
 });

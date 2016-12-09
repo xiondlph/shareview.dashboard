@@ -30,22 +30,22 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         xtype: 'admin.form',
         title: 'Настройки',
         reference: 'setting',
+        trackResetOnLoad: true,
+        jsonSubmit: true,
+        waitMsgTarget: true,
+        url: '/api/profile',
+        method: 'PUT',
         items: [{
             blankText: 'Следует указать Email',
             fieldLabel: 'Email',
+            reference: 'emailField',
             name: 'email',
-            vtype: 'email',
-            bind: {
-                value: '{profile.email}'
-            }
+            vtype: 'email'
         }, {
             blankText: 'Необходимо привязать IP адрес',
             fieldLabel: 'IP адрес',
             reference: 'addressField',
             name: 'address',
-            bind: {
-                value: '{profile.address}'
-            },
             triggers: {
                 hint: {
                     cls: 'trigger-question'
@@ -56,7 +56,7 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             text: 'Сохранить',
             formBind: true,
             listeners: {
-                click: 'saveSettings'
+                click: 'onSaveSettings'
             }
         }]
     }, {

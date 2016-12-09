@@ -144,8 +144,34 @@ Ext.define('Admin.view.main.MainController', {
 	},
 
 	onRouteChange: function(id){
+		if (id !== 'login') {
+            this.loadProfile();
+		}
+
 		this.setCurrentView(id);
 	},
+
+	loadProfile: function () {
+		var me 	= this,
+        	vm  = me.getViewModel();
+
+		if (vm.get('profile')) {
+			return;
+		}
+
+        Ext.Ajax.request({
+            url: '/api/profile'
+        }).then(function(response, opts) {
+			var obj = Ext.decode(response.responseText);
+
+			vm.setLinks({
+                profile: {
+                    type: 'Admin.model.Profile',
+                    create: obj.profile
+				}
+			});
+		});
+    },
 
 	preConfig: function () {
 		var me = this;
@@ -153,27 +179,18 @@ Ext.define('Admin.view.main.MainController', {
         // Перехват ошибок аякс запросов
         Ext.Ajax.on('requestexception', function(connection, response, options) {
             if (response.status === 403) {
-            	if (me.lastView.xtype === 'login') {
-                    Ext.MessageBox.show({
-                        title: 'Ошибка',
-                        msg: 'Время сессии истекло!',
-                        buttons: Ext.MessageBox.OK,
-                        icon: Ext.MessageBox.ERROR,
-                        fn: function(){
-                            window.location.href="/admin/";
-                        }
-                    });
-				} else {
-            		me.redirectTo('login', true);
+            	if (me.lastView.xtype !== 'login') {
+                    me.redirectTo('login', true);
 				}
-            } else {
-                Ext.MessageBox.show({
-                    title: 'Ошибка',
-                    msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
-                    buttons: Ext.MessageBox.OK,
-                    icon: Ext.MessageBox.ERROR
-                });
+                return;
             }
+
+            Ext.MessageBox.show({
+                title: 'Ошибка',
+                msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
+                buttons: Ext.MessageBox.OK,
+                icon: Ext.MessageBox.ERROR
+            });
         }, this);
     }
 });
