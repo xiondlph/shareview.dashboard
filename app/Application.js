@@ -9,13 +9,11 @@ Ext.define('Admin.Application', {
     name: 'Admin',
 
     stores: [
-        'NavigationTree'
+        // TODO: add global / shared stores here
     ],
     
     launch: function () {
-        var ctrl = this.getMainView().getController();
-
-        ctrl.preConfig();
+        // TODO - Launch the application
     },
 
     onAppUpdate: function () {
