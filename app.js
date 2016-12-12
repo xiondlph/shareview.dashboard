@@ -9,14 +9,17 @@ Ext.application({
     extend: 'Admin.Application',
 
     requires: [
-        'Admin.view.main.Main'
-    ],
+        'Admin.view.authentication.Login',
+        'Admin.view.dashboard.Dashboard',
+        'Admin.view.profile.Profile',
+        'Admin.view.payment.Payment'
+    ]
 
     // The name of the initial view to create. With the classic toolkit this class
     // will gain a "viewport" plugin if it does not extend Ext.Viewport. With the
     // modern toolkit, the main view will be added to the Viewport.
     //
-    mainView: 'Admin.view.main.Main'
+    // mainView: 'Admin.view.main.Main'
 	
     //-------------------------------------------------------------------------
     // Most customizations should be made to Admin.Application. If you need to

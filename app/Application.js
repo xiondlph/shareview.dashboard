@@ -9,7 +9,11 @@ Ext.define('Admin.Application', {
     name: 'Admin',
 
     stores: [
-        // TODO: add global / shared stores here
+        'Navigation'
+    ],
+
+    controllers: [
+        'Main'
     ],
     
     launch: function () {
