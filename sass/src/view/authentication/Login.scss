@@ -1,0 +1,11 @@
+.auth-email-trigger {
+    .x-font-icon:before {
+        content: "email";
+    }
+}
+
+.auth-password-trigger {
+    .x-font-icon:before {
+        content: "lock";
+    }
+}

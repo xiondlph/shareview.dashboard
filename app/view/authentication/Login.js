@@ -29,6 +29,9 @@ Ext.define('Admin.view.authentication.Login',{
         }]
     }, {
         xtype: 'formpanel',
+        reference: 'login',
+        url: '/user/signin',
+        method: 'post',
         plugins: 'responsive',
         responsiveConfig: {
             'width < 500': {
@@ -76,6 +79,7 @@ Ext.define('Admin.view.authentication.Login',{
             text: 'Вход',
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
+            ui: 'confirm',
             margin: '30 0 0 0',
             listeners: {
                 tap: 'onLoginButton'
