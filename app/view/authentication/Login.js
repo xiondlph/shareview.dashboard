@@ -30,8 +30,6 @@ Ext.define('Admin.view.authentication.Login',{
     }, {
         xtype: 'formpanel',
         reference: 'login',
-        url: '/user/signin',
-        method: 'post',
         plugins: 'responsive',
         responsiveConfig: {
             'width < 500': {
@@ -52,6 +50,7 @@ Ext.define('Admin.view.authentication.Login',{
             html: 'Вход в личный кабинет'
         }, {
             xtype: 'textfield',
+            itemId: 'email',
             name: 'email',
             allowBlank : false,
             label: 'E-Mail',
@@ -76,14 +75,12 @@ Ext.define('Admin.view.authentication.Login',{
             }
         }, {
             xtype: 'button',
+            itemId: 'loginbtn',
             text: 'Вход',
             iconAlign: 'right',
             iconCls: 'x-fa fa-angle-right',
             ui: 'confirm',
             margin: '30 0 0 0',
-            listeners: {
-                tap: 'onLoginButton'
-            },
             bind: {
                 disabled: '{!isCredentialsOk}'
             }
