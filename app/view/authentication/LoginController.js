@@ -2,9 +2,20 @@ Ext.define('Admin.view.authentication.LoginController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.authentication-login',
 
+    control: {
+        'textfield': {
+            keyup: 'fieldKeyUp'
+        },
+
+        '#loginbtn': {
+            tap: 'onLoginButton'
+        }
+    },
+
     onLoginButton: function () {
         var me = this,
             refs = me.getReferences(),
+            form = refs.login,
             view = me.getView(),
             vm = me.getViewModel(),
             credentials = vm.get('credentials'),
@@ -12,33 +23,35 @@ Ext.define('Admin.view.authentication.LoginController', {
             action;
 
         if (validate.isValid()) {
-            Ext.Viewport.remove(view);
-            Ext.Viewport.add({
-                xtype: 'admin.dashboard'
+            form.setMasked({
+                xtype: 'loadmask',
+                message: 'Авторизация...'
+            });
+
+            Ext.Ajax.request({
+                url: 'resources/data/authentication/login/success.json', //'/user/signin',
+                method: 'post',
+                jsonData: form.getValues()
+            }).then(function (response, opts) {
+                var data = Ext.decode(response.responseText);
+                form.setMasked(false);
+
+                if (data.success) {
+                    me.getView().fireEvent('auth', data);
+                } else {
+                    Admin.Overlay('Неверные E-mail или пароль');
+                }
+            }, function (response, opts) {
+                form.setMasked(false);
             });
         } else {
-            refs.login.submit({
-                params: "",
-                jsonData: Ext.util.JSON.encode(refs.login.getValues()),
-                //waitTitle:'Авторизация...',
-                waitMsg:'Авторизация...'
-            });
-            // Ext.toast('Неверный формат E-Mail', 500);
-            // action = Ext.create('Ext.ActionSheet', {
-            //     items: [{
-            //         xtype: 'label',
-            //         html: 'Error'
-            //     }, {
-            //         text: 'OK',
-            //         scope: this,
-            //         handler: function() {
-            //             action.hide();
-            //         }
-            //     }]
-            // });
-            //
-            // Ext.Viewport.add(action);
-            // action.show();
+            Ext.toast('Неверный формат E-Mail', 3000);
+        }
+    },
+
+    fieldKeyUp: function (field, e) {
+        if( e.event.keyCode === 13) {
+            field.up('formpanel').getComponent('loginbtn').fireEvent('tap');
         }
     }
 });
