@@ -2,6 +2,10 @@ Ext.define('Admin.view.authentication.LoginController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.authentication-login',
 
+    requires: [
+        'Ext.Toast'
+    ],
+
     control: {
         'textfield': {
             keyup: 'fieldKeyUp'
@@ -12,15 +16,13 @@ Ext.define('Admin.view.authentication.LoginController', {
         }
     },
 
-    onLoginButton: function () {
+    onLoginButton: function (btn) {
         var me = this,
             refs = me.getReferences(),
             form = refs.login,
-            view = me.getView(),
             vm = me.getViewModel(),
-            credentials = vm.get('credentials'),
-            validate = credentials.validate(),
-            action;
+            auth = vm.get('auth'),
+            validate = auth.validate();
 
         if (validate.isValid()) {
             form.setMasked({
@@ -45,7 +47,13 @@ Ext.define('Admin.view.authentication.LoginController', {
                 form.setMasked(false);
             });
         } else {
-            Ext.toast('Неверный формат E-Mail', 3000);
+            validate.each(function (errField) {
+                Ext.toast({
+                    message: errField.msg,
+                    timeout: 3000,
+                    constrainTo: btn
+                });
+            });
         }
     },
 

@@ -3,7 +3,8 @@ Ext.define('Admin.view.authentication.Login',{
     extend: 'Ext.Container',
 
     requires: [
-        'Admin.Model.Login',
+        'Ext.plugin.Responsive',
+        'Admin.Model.Auth',
         'Admin.view.authentication.LoginController',
         'Admin.view.authentication.LoginModel'
     ],
@@ -55,7 +56,7 @@ Ext.define('Admin.view.authentication.Login',{
             allowBlank : false,
             label: 'E-Mail',
             labelAlign: 'placeholder',
-            bind: '{credentials.email}',
+            bind: '{auth.email}',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-email-trigger'
@@ -67,7 +68,7 @@ Ext.define('Admin.view.authentication.Login',{
             allowBlank : false,
             label: 'Пароль',
             labelAlign: 'placeholder',
-            bind: '{credentials.password}',
+            bind: '{auth.password}',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph-noop auth-password-trigger'
@@ -82,7 +83,7 @@ Ext.define('Admin.view.authentication.Login',{
             ui: 'confirm',
             margin: '30 0 0 0',
             bind: {
-                disabled: '{!isCredentialsOk}'
+                disabled: '{!isFilled}'
             }
         }]
     }]

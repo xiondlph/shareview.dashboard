@@ -9,10 +9,7 @@ Ext.application({
     extend: 'Admin.Application',
 
     requires: [
-        'Admin.view.authentication.Login',
-        'Admin.view.dashboard.Dashboard',
-        'Admin.view.profile.Profile',
-        'Admin.view.payment.Payment'
+        'Admin.*'
     ]
 
     // The name of the initial view to create. With the classic toolkit this class

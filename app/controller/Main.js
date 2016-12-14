@@ -1,6 +1,10 @@
 Ext.define('Admin.controller.Main', {
     extend: 'Ext.app.Controller',
 
+    requires: [
+        'Admin.view.authentication.Login'
+    ],
+
     onLaunch: function () {
         Admin.Overlay = this.showOverlay;
 
@@ -28,6 +32,11 @@ Ext.define('Admin.controller.Main', {
                 me.showLoginForm();
             }
         }, function (response, opts) {
+            if (response.status === 403) {
+                me.showLoginForm();
+                return;
+            }
+
             Admin.Overlay();
         });
     },

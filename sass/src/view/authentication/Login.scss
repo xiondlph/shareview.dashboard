@@ -1,11 +1,13 @@
 .auth-email-trigger {
     .x-font-icon:before {
+        color: $trigger-color;
         content: "email";
     }
 }
 
 .auth-password-trigger {
     .x-font-icon:before {
+        color: $trigger-color;
         content: "lock";
     }
 }
