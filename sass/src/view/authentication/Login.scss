@@ -1,13 +1,13 @@
-.auth-email-trigger {
-    .x-font-icon:before {
-        color: $trigger-color;
-        content: "email";
+.trigger-glyph {
+    &.auth-email {
+        .x-font-icon:before {
+            content: "email";
+        }
     }
-}
 
-.auth-password-trigger {
-    .x-font-icon:before {
-        color: $trigger-color;
-        content: "lock";
+    &.auth-password {
+        .x-font-icon:before {
+            content: "lock";
+        }
     }
 }
