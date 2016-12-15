@@ -51,27 +51,26 @@ Ext.define('Admin.view.authentication.Login',{
             html: 'Вход в личный кабинет'
         }, {
             xtype: 'textfield',
-            itemId: 'email',
             name: 'email',
-            allowBlank : false,
             label: 'E-Mail',
             labelAlign: 'placeholder',
+            clearIcon: false,
             bind: '{auth.email}',
             triggers: {
                 glyphed: {
-                    cls: 'trigger-glyph-noop auth-email-trigger'
+                    cls: 'trigger-glyph auth-email'
                 }
             }
         }, {
             xtype: 'passwordfield',
             name: 'password',
-            allowBlank : false,
             label: 'Пароль',
             labelAlign: 'placeholder',
+            clearIcon: false,
             bind: '{auth.password}',
             triggers: {
                 glyphed: {
-                    cls: 'trigger-glyph-noop auth-password-trigger'
+                    cls: 'trigger-glyph auth-password'
                 }
             }
         }, {
