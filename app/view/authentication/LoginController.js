@@ -48,9 +48,12 @@ Ext.define('Admin.view.authentication.LoginController', {
                 form.setMasked(false);
             });
         } else {
-            firstErrField = validate.first();
+            // firstErrField = validate.first();
 
-            Ext.toast(firstErrField.msg || firstErrField[0].msg, 3000);
+            // Ext.toast(firstErrField.msg || firstErrField[0].msg, 3000);
+            validate.each(function (item) {
+                form.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
+            });
         }
     },
 
@@ -60,7 +63,7 @@ Ext.define('Admin.view.authentication.LoginController', {
         if( e.event.keyCode === 13) {
             btn = field.up('formpanel').getComponent('loginbtn');
 
-            !btn.getDisabled() && btn.fireEvent('tap');
+            btn.fireEvent('tap');
         }
     }
 });
