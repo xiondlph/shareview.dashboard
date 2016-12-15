@@ -1,3 +1,32 @@
 /*
  * This is is imported by virtue of "sass.etc" in "app.json".
  */
+
+.x-toast {
+	top: 30%;
+}
+
+.x-sheet-action {
+	.x-label {
+		padding-bottom: 10px;
+		text-align: center;
+	}
+}
+
+.x-button {
+	&.x-disabled {
+		color: $disabled-button-color;
+
+		.x-button-icon {
+			color: $disabled-button-color;
+		}
+	}
+}
+
+.x-trigger {
+	&.trigger-glyph {
+		.x-font-icon {
+			color: $trigger-glyph-color;
+		}
+	}
+}
