@@ -22,7 +22,8 @@ Ext.define('Admin.view.authentication.LoginController', {
             form = refs.login,
             vm = me.getViewModel(),
             auth = vm.get('auth'),
-            validate = auth.validate();
+            validate = auth.validate(),
+            firstErrField;
 
         if (validate.isValid()) {
             form.setMasked({
@@ -47,19 +48,19 @@ Ext.define('Admin.view.authentication.LoginController', {
                 form.setMasked(false);
             });
         } else {
-            validate.each(function (errField) {
-                Ext.toast({
-                    message: errField.msg,
-                    timeout: 3000,
-                    constrainTo: btn
-                });
-            });
+            firstErrField = validate.first();
+
+            Ext.toast(firstErrField.msg || firstErrField[0].msg, 3000);
         }
     },
 
     fieldKeyUp: function (field, e) {
+        var btn;
+
         if( e.event.keyCode === 13) {
-            field.up('formpanel').getComponent('loginbtn').fireEvent('tap');
+            btn = field.up('formpanel').getComponent('loginbtn');
+
+            !btn.getDisabled() && btn.fireEvent('tap');
         }
     }
 });
