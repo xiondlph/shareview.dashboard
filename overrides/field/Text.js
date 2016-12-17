@@ -10,7 +10,7 @@ Ext.define('Admin.override.field.Text', {
     config: {
         triggers: {
             invalid: {
-                cls: 'trigger-glyph auth-email',
+                cls: 'trigger-glyph trigger-invalid',
                 hidden: true,
                 handler: function () {
                     this.showValidationMsg();
@@ -34,6 +34,10 @@ Ext.define('Admin.override.field.Text', {
     },
 
     showValidationMsg: function () {
-        Ext.toast(this.getValidationMsg(), 3000);
+        Ext.toast({
+            message: this.getValidationMsg(),
+            timeout: 3000,
+            modal: true
+        });
     }
 });

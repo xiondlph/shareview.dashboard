@@ -28,5 +28,29 @@
 		.x-font-icon {
 			color: $trigger-glyph-color;
 		}
+
+		&.trigger-invalid {
+			.x-font-icon {
+				color: $trigger-invalid-color;
+
+				&:before {
+					content: "error_outline";
+				}
+			}
+		}
+
+		&.x-interactive {
+			&:active {
+				.x-icon-el {
+					color: $trigger-invalid-color;
+				}
+			}
+
+			&:hover {
+				.x-icon-el {
+					color: $trigger-invalid-color;
+				}
+			}
+		}
 	}
 }

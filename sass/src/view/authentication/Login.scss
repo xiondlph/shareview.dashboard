@@ -1,13 +1,13 @@
 .trigger-glyph {
     &.auth-email {
         .x-font-icon:before {
-            content: "email";
+            content: "mail_outline";
         }
     }
 
     &.auth-password {
         .x-font-icon:before {
-            content: "lock";
+            content: "lock_outline";
         }
     }
 }
