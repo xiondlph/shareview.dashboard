@@ -16,9 +16,9 @@ Ext.define('Admin.Application', {
         'Main'
     ],
     
-    // launch: function () {
-        // TODO - Launch the application
-    // },
+    launch: function () {
+        Ext.fly('appLoadingIndicator').destroy();
+    },
 
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
