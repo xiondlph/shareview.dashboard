@@ -48,7 +48,42 @@
     
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
     <script id="microloader" data-app="18e39a2b-f72c-43d9-9a06-49090cf54385" type="text/javascript" src="bootstrap.js"></script>
+    <style>
+        .loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -30px;
+            margin-left: -30px;
 
+            width: 60px;
+            height: 60px;
+            background-color: #333;
+
+            border-radius: 100%;
+            -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+            animation: sk-scaleout 1.0s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes sk-scaleout {
+            0% { -webkit-transform: scale(0) }
+            100% {
+                -webkit-transform: scale(1.0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sk-scaleout {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            } 100% {
+                  -webkit-transform: scale(1.0);
+                  transform: scale(1.0);
+                  opacity: 0;
+              }
+        }
+    </style>
 </head>
-<body></body>
+<body><div class="loading-indicator" id="appLoadingIndicator"></div></body>
 </html>
