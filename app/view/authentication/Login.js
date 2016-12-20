@@ -1,4 +1,3 @@
-
 Ext.define('Admin.view.authentication.Login',{
     extend: 'Ext.Container',
 
@@ -14,7 +13,6 @@ Ext.define('Admin.view.authentication.Login',{
         type: 'authentication-login'
     },
 
-    fullscreen: true,
     layout: {
         type: 'vbox',
         pack: 'center',
@@ -24,26 +22,24 @@ Ext.define('Admin.view.authentication.Login',{
     items: [{
         xtype: 'toolbar',
         docked: 'top',
+        reference: 'adminMainBar',
+        cls: 'admin-main-bar',
         items: [{
             xtype: 'component',
             html: 'Shareview'
         }]
     }, {
         xtype: 'formpanel',
-        reference: 'login',
+        reference: 'adminLoginForm',
+        height: '100%',
+        width: '100%',
+        padding: 30,
         plugins: 'responsive',
         responsiveConfig: {
-            'width < 500': {
-                shadow: false,
-                width: '100%',
-                height: '100%'
-            },
-
-            'width >= 500': {
-                padding: 30,
+            'desktop': {
                 shadow: true,
-                width: 500,
-                height: 'auto'
+                height: 'auto',
+                width: 500
             }
         },
         items: [{
@@ -55,6 +51,7 @@ Ext.define('Admin.view.authentication.Login',{
             label: 'E-Mail',
             labelAlign: 'placeholder',
             clearIcon: false,
+            autoComplete: false,
             bind: '{auth.email}',
             triggers: {
                 glyphed: {
@@ -85,5 +82,8 @@ Ext.define('Admin.view.authentication.Login',{
                 disabled: '{!isFilled}'
             }
         }]
-    }]
+    }],
+    listeners: {
+        resize: 'onContainerResize'
+    }
 });

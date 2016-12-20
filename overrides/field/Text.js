@@ -34,10 +34,6 @@ Ext.define('Admin.override.field.Text', {
     },
 
     showValidationMsg: function () {
-        Ext.toast({
-            message: this.getValidationMsg(),
-            timeout: 3000,
-            modal: true
-        });
+        Ext.toast(this.getValidationMsg(), 30000);
     }
 });

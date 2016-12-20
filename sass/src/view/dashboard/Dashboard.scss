@@ -1,0 +1,11 @@
+.main-menu {
+    background-color: #90caf9;
+    transition: width 0.3s;
+    padding: 10px 0;
+    width: 200px;
+    height: 100%;
+
+    &-collapsed {
+        width: 54px;
+    }
+}

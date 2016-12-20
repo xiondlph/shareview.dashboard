@@ -8,8 +8,8 @@ Ext.define('Admin.controller.Main', {
     onLaunch: function () {
         Admin.Overlay = this.showOverlay;
 
-        //this.loadProfile();
-        this.showDashboard();
+        this.loadProfile();
+        //this.showDashboard();
     },
 
     onAuth: function (userData) {

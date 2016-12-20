@@ -1,3 +1,19 @@
+.admin-main-bar {
+    transition: height 0.1s;
+    overflow: hidden;
+    height: 40px;
+
+    .x-toolbar-inner {
+        padding: 0;
+        min-height: 40px;
+    }
+
+    &-toggle {
+        background-color: #C62828;
+        height: 0;
+    }
+}
+
 .trigger-glyph {
     &.auth-email {
         .x-font-icon:before {

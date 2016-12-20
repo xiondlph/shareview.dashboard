@@ -33,7 +33,47 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     },
 
     updateShowNavigation: function (showNavigation, oldValue) {
-        //
+        if (oldValue === undefined) {
+            return;
+        }
+
+        var me = this,
+            refs = this.getReferences(),
+            isFloated = refs.menu.getFloated();
+
+        if (isFloated) {
+            Ext.Viewport.setMasked(true);
+            Ext.Viewport.getMasked().element.on({
+                tap: me.onToggleNavigationSize,
+                scope: me,
+                single: true
+            });
+
+            if (showNavigation) {
+                refs.menu.show();
+                refs.menu.translate(-200, 0);
+                refs.menu.translate(0, 0, {duration: 200});
+                refs.card.translate(180, 0, {duration: 200});
+            } else {
+                refs.menu.getTranslatable().on('animationend', function() {
+                    refs.menu.hide();
+                    Ext.Viewport.setMasked(false);
+                }, me, {
+                    single: true
+                });
+                refs.menu.translate(-200, 0, {duration: 200});
+                refs.card.translate(0, 0, {duration: 200});
+            }
+        } else {
+            refs.menu.toggleCls('main-menu-collapsed');
+            refs.menu.element.on({
+                transitionend: function () {
+                    refs.navigation.setMicro(showNavigation);
+                },
+                single: true
+            });
+        }
+
     },
 
     onRouteChange: function (id) {

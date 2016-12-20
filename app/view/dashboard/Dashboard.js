@@ -4,6 +4,7 @@ Ext.define('Admin.view.dashboard.Dashboard',{
     xtype: 'admin.dashboard',
 
     requires: [
+        'Ext.plugin.Responsive',
         'Admin.view.dashboard.DashboardController',
         'Admin.view.dashboard.DashboardModel'
     ],
@@ -31,10 +32,19 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         }]
     }, {
         xtype: 'container',
+        cls: 'main-menu',
         reference: 'menu',
         shadow: true,
+        floated: true,
+        plugins: 'responsive',
+        responsiveConfig: {
+            'desktop': {
+                floated: false
+            }
+        },
         items: [{
             xtype: 'treelist',
+            cls: 'main-menu-navigation',
             reference: 'navigation',
             expanderFirst: false,
             expanderOnly: false,

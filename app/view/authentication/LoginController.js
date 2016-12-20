@@ -8,6 +8,7 @@ Ext.define('Admin.view.authentication.LoginController', {
 
     control: {
         'textfield': {
+            focus: 'onFieldFocus',
             keyup: 'fieldKeyUp'
         },
 
@@ -16,10 +17,14 @@ Ext.define('Admin.view.authentication.LoginController', {
         }
     },
 
+    config: {
+        containerHeight: null
+    },
+
     onLoginButton: function (btn) {
         var me = this,
             refs = me.getReferences(),
-            form = refs.login,
+            form = refs.adminLoginForm,
             vm = me.getViewModel(),
             auth = vm.get('auth'),
             validate = auth.validate(),
@@ -54,6 +59,18 @@ Ext.define('Admin.view.authentication.LoginController', {
         }
     },
 
+    onFieldFocus: function (field) {
+        if (Ext.platformTags.desktop) {
+            return;
+        }
+
+        var me = this;
+
+        setTimeout(function () {
+            me.fieldMoveTop(field);
+        }, 700);
+    },
+
     fieldKeyUp: function (field, e) {
         var btn;
 
@@ -62,5 +79,39 @@ Ext.define('Admin.view.authentication.LoginController', {
 
             !btn.getDisabled() && btn.fireEvent('tap');
         }
+    },
+
+    onContainerResize: function (cmp) {
+        if (Ext.platformTags.desktop) {
+            return;
+        }
+
+        this.setContainerHeight(cmp.getSize().height);
+    },
+
+
+    updateContainerHeight: function (height, oldValue) {
+        if (oldValue === undefined) {
+            return;
+        }
+
+        var refs = this.getReferences();
+
+        // Верхняя панель
+        if (height < 200) {
+            refs.adminMainBar.setHeight(0);
+        } else {
+            refs.adminMainBar.setHeight(40);
+        }
+    },
+
+    fieldMoveTop: function (field) {
+        var scroller = field.up('formpanel').getScrollable(),
+            offset = field.element.getY(),
+            containerHeight = this.getView().element.dom.clientHeight;
+
+        offset -= 10;
+
+        scroller.scrollTo(null, scroller.position.y + offset, true);
     }
 });
