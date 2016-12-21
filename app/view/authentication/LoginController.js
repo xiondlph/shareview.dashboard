@@ -101,7 +101,7 @@ Ext.define('Admin.view.authentication.LoginController', {
         if (height < 200) {
             refs.adminMainBar.setHeight(0);
         } else {
-            refs.adminMainBar.setHeight(40);
+            refs.adminMainBar.setHeight(60);
         }
     },
 
