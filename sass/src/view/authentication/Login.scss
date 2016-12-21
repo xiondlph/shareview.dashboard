@@ -1,16 +1,22 @@
-.admin-main-bar {
+.admin-auth-bar {
     transition: height 0.1s;
     overflow: hidden;
-    height: 40px;
+    height: 60px;
 
     .x-toolbar-inner {
+        min-height: 60px;
         padding: 0;
-        min-height: 40px;
     }
 
     &-toggle {
         background-color: #C62828;
         height: 0;
+    }
+
+    .admin-logo {
+        font-weight: normal;
+        font-size: 0.8em;
+        padding: 0 10px 0 30px;
     }
 }
 
