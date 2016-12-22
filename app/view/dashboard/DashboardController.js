@@ -65,7 +65,8 @@ Ext.define('Admin.view.dashboard.DashboardController', {
                 refs.card.translate(0, 0, {duration: 200});
             }
         } else {
-            refs.menu.toggleCls('main-menu-collapsed');
+            refs.adminLogo.toggleCls('admin-logo-collapsed');
+            refs.menu.toggleCls('main-dashboard-menu-collapsed');
             refs.menu.element.on({
                 transitionend: function () {
                     refs.navigation.setMicro(showNavigation);
