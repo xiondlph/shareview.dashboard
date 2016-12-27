@@ -54,6 +54,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
                 refs.menu.translate(-200, 0);
                 refs.menu.translate(0, 0, {duration: 200});
                 refs.card.translate(180, 0, {duration: 200});
+                refs.adminMainBar.translate(180, 0, {duration: 200});
             } else {
                 refs.menu.getTranslatable().on('animationend', function() {
                     refs.menu.hide();
@@ -63,6 +64,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
                 });
                 refs.menu.translate(-200, 0, {duration: 200});
                 refs.card.translate(0, 0, {duration: 200});
+                refs.adminMainBar.translate(0, 0, {duration: 200});
             }
         } else {
             refs.adminLogo.toggleCls('admin-logo-collapsed');

@@ -37,7 +37,7 @@ Ext.define('Admin.view.authentication.LoginController', {
             });
 
             Ext.Ajax.request({
-                url: 'resources/data/authentication/login/success.json', //'/user/signin',
+                url: '/user/signin', //'resources/data/authentication/login/success.json',
                 method: 'post',
                 jsonData: form.getValues()
             }).then(function (response, opts) {

@@ -27,12 +27,19 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             xtype: 'component',
             reference: 'adminLogo',
             cls: 'admin-logo',
-            html: 'Shareview'
+            html: 'Shareview',
+            hidden: true,
+            plugins: 'responsive',
+            responsiveConfig: {
+                'desktop': {
+                    hidden: false
+                }
+            }
         }, {
             xtype: 'button',
             ui: 'header',
             iconCls: 'x-fa fa-bars',
-            margin: '0 10 0 0',
+            margin: '0 0 0 10',
             listeners: {
                 tap: 'onToggleNavigationSize'
             }
@@ -50,6 +57,17 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             }
         },
         items: [{
+            xtype: 'component',
+            cls: 'admin-logo',
+            html: 'Shareview',
+            hidden: false,
+            plugins: 'responsive',
+            responsiveConfig: {
+                'desktop': {
+                    hidden: true
+                }
+            }
+        }, {
             xtype: 'treelist',
             cls: 'main-dashboard-menu-navigation',
             reference: 'navigation',

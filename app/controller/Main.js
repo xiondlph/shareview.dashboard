@@ -8,8 +8,8 @@ Ext.define('Admin.controller.Main', {
     onLaunch: function () {
         Admin.Overlay = this.showOverlay;
 
-        //this.loadProfile();
-        this.showDashboard();
+        this.loadProfile();
+        //this.showDashboard();
     },
 
     onAuth: function (userData) {
@@ -23,7 +23,7 @@ Ext.define('Admin.controller.Main', {
             overlay;
 
         Ext.Ajax.request({
-            url: 'resources/data/forbidden.json' //'/api/profile'
+            url: '/api/profile' //'resources/data/forbidden.json'
         }).then(function(response, opts) {
             var data = Ext.decode(response.responseText);
 

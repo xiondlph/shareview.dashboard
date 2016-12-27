@@ -62,19 +62,27 @@
 
 .admin {
     &-bar {
+        overflow: hidden;
         height: 44px;
 
         .x-toolbar-inner {
+            min-height: 44px;
             padding: 0;
         }
     }
 
     &-logo {
+        background-image: url("images/shareview-icon.png");
+        background-position: 10px center;
+        background-repeat: no-repeat;
         background-color: $base-color;
         transition: width 0.3s;
+        background-size: 20px;
+        padding-left: 44px;
+        line-height: 44px;
         overflow: hidden;
-        height: 44px;
         width: 200px;
+        color: #fff; // TODO Нужна переменная
 
         &-collapsed {
             width: 44px;
