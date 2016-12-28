@@ -22,11 +22,11 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         xtype: 'toolbar',
         docked: 'top',
         reference: 'adminMainBar',
-        cls: 'admin-bar',
+        cls: 'admin-dashboard-bar',
         items: [{
             xtype: 'component',
             reference: 'adminLogo',
-            cls: 'admin-logo',
+            cls: 'admin-dashboard-logo',
             html: 'Shareview',
             hidden: true,
             plugins: 'responsive',
@@ -43,6 +43,14 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             listeners: {
                 tap: 'onToggleNavigationSize'
             }
+        }, '->', {
+            xtype: 'button',
+            ui: 'header',
+            iconCls: 'x-fa fa-power-off',
+            margin: '0 10 0 0',
+            listeners: {
+                tap: 'onLogout'
+            }
         }]
     }, {
         xtype: 'container',
@@ -58,7 +66,7 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         },
         items: [{
             xtype: 'component',
-            cls: 'admin-logo',
+            cls: 'admin-dashboard-logo',
             html: 'Shareview',
             hidden: false,
             plugins: 'responsive',
@@ -89,5 +97,8 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             type: 'card',
             animation: 'fade'
         }
-    }]
+    }],
+    listeners: {
+        resize: 'onContainerResize'
+    }
 });

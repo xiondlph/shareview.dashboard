@@ -15,7 +15,8 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     },
 
     config: {
-        showNavigation: false
+        showNavigation: false,
+        containerHeight: null
     },
 
     onNavigationItemClick: Ext.emptyFn,
@@ -30,6 +31,32 @@ Ext.define('Admin.view.dashboard.DashboardController', {
 
     onToggleNavigationSize: function () {
         this.setShowNavigation(!this.getShowNavigation());
+    },
+
+    onLogout: function () {
+        var view = this.getView();
+
+        view.setMasked({
+            xtype: 'loadmask',
+            message: 'Выход...'
+        });
+
+        Ext.Ajax.request({
+            url: '/user/signout'
+            //url: 'resources/data/authentication/login/success.json'
+        }).then(function (response, opts) {
+            var data = Ext.decode(response.responseText);
+            view.setMasked(false);
+
+            if (data.success) {
+                window.location.reload();
+            } else {
+                Admin.Overlay();
+            }
+        }, function (response, opts) {
+            view.setMasked(false);
+            Admin.Overlay();
+        });
     },
 
     updateShowNavigation: function (showNavigation, oldValue) {
@@ -67,7 +94,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
                 refs.adminMainBar.translate(0, 0, {duration: 200});
             }
         } else {
-            refs.adminLogo.toggleCls('admin-logo-collapsed');
+            refs.adminLogo.toggleCls('admin-dashboard-logo-collapsed');
             refs.menu.toggleCls('main-dashboard-menu-collapsed');
             refs.menu.element.on({
                 transitionend: function () {
@@ -104,5 +131,29 @@ Ext.define('Admin.view.dashboard.DashboardController', {
 
         card.setActiveItem(item);
         navigation.setSelection(node);
+    },
+
+    onContainerResize: function (cmp) {
+        if (Ext.platformTags.desktop) {
+            return;
+        }
+
+        this.setContainerHeight(cmp.getSize().height);
+    },
+
+
+    updateContainerHeight: function (height, oldValue) {
+        if (oldValue === undefined) {
+            return;
+        }
+
+        var refs = this.getReferences();
+
+        // Верхняя панель
+        if (height < 200) {
+            refs.adminMainBar.setHeight(0);
+        } else {
+            refs.adminMainBar.setHeight(60);
+        }
     }
 });

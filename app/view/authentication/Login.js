@@ -26,7 +26,7 @@ Ext.define('Admin.view.authentication.Login',{
         cls: 'admin-auth-bar',
         items: [{
             xtype: 'component',
-            cls: 'admin-logo',
+            cls: 'admin-auth-logo',
             html: 'Shareview'
         }]
     }, {

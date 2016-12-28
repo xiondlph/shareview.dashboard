@@ -18,7 +18,7 @@
         $item-expanded-background-color: #2c3845,
 
             // Taller line height
-        $item-line-height : 36px,
+        $item-line-height : 60px,
 
             // Off-white text
         $item-icon-color: #ADB3B8,
@@ -37,8 +37,8 @@
         $row-indicator-over-color: lighten(#5fa2dd, 10%),
 
             // Various sizes for the pieces:
-        $item-icon-font-size: 18px,
-        $item-icon-width: 24px,
+        $item-icon-font-size: 24px,
+        $item-icon-width: 40px,
         $item-expander-font-size: 16px,
         $item-expander-width: 24px,
 
@@ -51,7 +51,7 @@
     height: 100%;
 
     &-collapsed {
-        width: 44px;
+        width: 60px;
     }
 
     .x-component-inner,
@@ -60,32 +60,33 @@
     }
 }
 
-.admin {
+.admin-dashboard {
     &-bar {
+        transition: height 0.1s;
         overflow: hidden;
-        height: 44px;
+        height: 60px;
 
         .x-toolbar-inner {
-            min-height: 44px;
+            min-height: 60px;
             padding: 0;
         }
     }
 
     &-logo {
         background-image: url("images/shareview-icon.png");
-        background-position: 10px center;
+        background-position: 18px center;
         background-repeat: no-repeat;
         background-color: $base-color;
         transition: width 0.3s;
         background-size: 20px;
-        padding-left: 44px;
-        line-height: 44px;
+        padding-left: 60px;
+        line-height: 60px;
         overflow: hidden;
         width: 200px;
         color: #fff; // TODO Нужна переменная
 
         &-collapsed {
-            width: 44px;
+            width: 60px;
         }
     }
 }
