@@ -26,6 +26,9 @@
     },
     "{controllerFileName}.js.tpl.merge": {
       "b092f4aad11d2f7eaab5ce3e2dcc2fc3134f3188": "eJxzrSjRS0lNy8xL1VCvTs7PKynKz8lJLfJLzE0tLkhMTq3VQxOtVddRqOZSAILUipLUvBQrBXVXoBmJBQV6znCF6ly1mtZcACwSIF0\u003d"
+    },
+    "{profileFileName}.js.tpl.merge": {
+      "99a94fcf631093dae0e3543382df4b40aa060c43": "eJxdUDFuwzAM3POK25wAhrM7U4esRfeig2rRCQGFMiQ6TmD475Vko2jDQZCOPOruzg9tLPUstK9mMwzv5kZLMwTfs6Nmlvysasw7pKKHktgW1Tmx0nDzsc5VdWmX43hc18HIE8ZaVvZiHDpnYqSIpx8DNh6EyEZcKVDhdl56vrTbb7nuTFNs8flV/0I3b8m9YFF9oBcsLdPgnaNQGgVf/gnVK0dsVjGxc/hOsjvlu1Gy4B4TwZJSp+lWBUIYRVgu8AKDNZyyi+NbplGLfpQuO96neA5/jATSMQhycD42HLdoT6us3XI4/QB37nfu"
     }
   },
   "targets": {
@@ -294,6 +297,36 @@
         "controllerName": "Main",
         "controllerNamespace": "Admin.controller",
         "name": "Main"
+      }
+    },
+    "app/profile/phone.js": {
+      "source": "{profileFileName}.js.tpl.merge",
+      "version": "99a94fcf631093dae0e3543382df4b40aa060c43",
+      "parameters": {
+        "appName": "Admin",
+        "name": "phone",
+        "profileFileName": "phone",
+        "profileName": "phone"
+      }
+    },
+    "app/profile/Phone.js": {
+      "source": "{profileFileName}.js.tpl.merge",
+      "version": "99a94fcf631093dae0e3543382df4b40aa060c43",
+      "parameters": {
+        "appName": "Admin",
+        "name": "Phone",
+        "profileFileName": "Phone",
+        "profileName": "Phone"
+      }
+    },
+    "app/profile/Mobile.js": {
+      "source": "{profileFileName}.js.tpl.merge",
+      "version": "99a94fcf631093dae0e3543382df4b40aa060c43",
+      "parameters": {
+        "appName": "Admin",
+        "name": "Mobile",
+        "profileFileName": "Mobile",
+        "profileName": "Mobile"
       }
     }
   }

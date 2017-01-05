@@ -150,10 +150,16 @@ Ext.define('Admin.view.dashboard.DashboardController', {
         var refs = this.getReferences();
 
         // Верхняя панель
-        if (height < 200) {
+        if (height < 300) {
             refs.adminMainBar.setHeight(0);
         } else {
             refs.adminMainBar.setHeight(60);
+        }
+    },
+
+    onDashboardPainted: function () {
+        if (!window.location.hash) {
+            this.redirectTo("profile");
         }
     }
 });

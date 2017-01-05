@@ -61,6 +61,8 @@
 }
 
 .admin-dashboard {
+    height: 100%;
+
     &-bar {
         transition: height 0.1s;
         overflow: hidden;

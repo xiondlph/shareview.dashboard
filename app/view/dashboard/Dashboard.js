@@ -18,6 +18,13 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         type: 'hbox'
     },
 
+    cls: 'admin-dashboard',
+    scrollable: true,
+    listeners: {
+        resize: 'onContainerResize',
+        painted: 'onDashboardPainted'
+    },
+
     items: [{
         xtype: 'toolbar',
         docked: 'top',
@@ -44,10 +51,15 @@ Ext.define('Admin.view.dashboard.Dashboard',{
                 tap: 'onToggleNavigationSize'
             }
         }, '->', {
+            xtype: 'component',
+            bind: {
+                html: '{profile.email}'
+            }
+        }, {
             xtype: 'button',
             ui: 'header',
             iconCls: 'x-fa fa-power-off',
-            margin: '0 10 0 0',
+            margin: '0 10',
             listeners: {
                 tap: 'onLogout'
             }
@@ -97,8 +109,5 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             type: 'card',
             animation: 'fade'
         }
-    }],
-    listeners: {
-        resize: 'onContainerResize'
-    }
+    }]
 });

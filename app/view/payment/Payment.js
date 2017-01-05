@@ -13,5 +13,51 @@ Ext.define('Admin.view.payment.Payment',{
         type: 'payment-payment'
     },
 
-    html: 'Hello, World!!'
+    layout: 'float',
+    padding: 10,
+    defaults: {
+        margin: 10,
+        plugins: 'responsive',
+        responsiveConfig: {
+            'width <= 800': {
+                width: 'calc(100% - 20px)'
+            },
+
+            'width > 800': {
+                width: 'calc(50% - 20px)'
+            }
+        }
+    },
+
+    items: [{
+        xtype: 'formpanel',
+        title: 'Настройки',
+        items: [
+            {
+                xtype: 'textfield',
+                label: 'Title',
+                labelAlign: 'placeholder'
+            },
+            {
+                xtype: 'textfield',
+                label: 'Price',
+                labelAlign: 'placeholder'
+            }
+        ]
+    }, {
+        xtype: 'formpanel',
+        title: 'Пароль',
+        items: [
+            {
+                xtype: 'textfield',
+                label: 'Title',
+                labelAlign: 'placeholder'
+            },
+            {
+                xtype: 'textfield',
+                label: 'Price',
+                labelAlign: 'placeholder'
+            }
+        ]
+    }]
 });

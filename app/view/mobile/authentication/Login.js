@@ -1,24 +1,17 @@
-Ext.define('Admin.view.authentication.Login',{
-    extend: 'Ext.Container',
-    xtype: 'login',
+Ext.define('Admin.view.mobile.authentication.Login',{
+    extend: 'Ext.panel.Panel',
 
     requires: [
-        'Ext.plugin.Responsive',
-        'Admin.Model.Auth',
-        'Admin.view.authentication.LoginController',
-        'Admin.view.authentication.LoginModel'
+        'Admin.view.mobile.authentication.LoginController',
+        'Admin.view.mobile.authentication.LoginModel'
     ],
 
-    controller: 'authentication-login',
+    controller: 'mobile-authentication-login',
     viewModel: {
         type: 'authentication-login'
     },
 
-    layout: {
-        type: 'vbox',
-        pack: 'center',
-        align: 'center'
-    },
+    padding: 0,
 
     items: [{
         xtype: 'toolbar',
@@ -33,10 +26,9 @@ Ext.define('Admin.view.authentication.Login',{
     }, {
         xtype: 'formpanel',
         reference: 'adminLoginForm',
-        height: 'auto',
-        width: 500,
-        padding: 30,
-        shadow: true,
+        height: '100%',
+        width: '100%',
+        padding: 20,
         items: [{
             padding: '0 0 10 0',
             html: 'Вход в личный кабинет'
@@ -77,5 +69,8 @@ Ext.define('Admin.view.authentication.Login',{
                 disabled: '{!isFilled}'
             }
         }]
-    }]
+    }],
+    listeners: {
+        resize: 'onContainerResize'
+    }
 });

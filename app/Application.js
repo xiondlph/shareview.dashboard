@@ -8,6 +8,10 @@ Ext.define('Admin.Application', {
     
     name: 'Admin',
 
+    profiles: [
+        'Mobile'
+    ],
+
     stores: [
         'Navigation'
     ],

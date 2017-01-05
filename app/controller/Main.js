@@ -44,7 +44,8 @@ Ext.define('Admin.controller.Main', {
     },
 
     showLoginForm: function () {
-        var Login = Ext.create('Admin.view.authentication.Login', {
+        var Login = Ext.create({
+            xtype: 'login',
             itemId: 'login',
             listeners: {
                 auth: {
@@ -57,8 +58,20 @@ Ext.define('Admin.controller.Main', {
     },
 
     showDashboard: function (userData) {
-        Ext.Viewport.add({
+        var dashboard = Ext.create({
             xtype: 'admin.dashboard'
+        });
+
+        Ext.Viewport.add(dashboard);
+
+        dashboard.getViewModel().setLinks({
+            profile: {
+                reference: 'Admin.Model.Profile',
+                create: {
+                    email: userData.profile.email,
+                    address: userData.profile.address
+                }
+            }
         });
     },
 

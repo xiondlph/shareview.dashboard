@@ -1,6 +1,6 @@
-Ext.define('Admin.view.authentication.LoginController', {
+Ext.define('Admin.view.mobile.authentication.LoginController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.authentication-login',
+    alias: 'controller.mobile-authentication-login',
 
     requires: [
         'Ext.Toast'
@@ -8,12 +8,17 @@ Ext.define('Admin.view.authentication.LoginController', {
 
     control: {
         'textfield': {
+            focus: 'onFieldFocus',
             keyup: 'fieldKeyUp'
         },
 
         '#loginbtn': {
             tap: 'onLoginButton'
         }
+    },
+
+    config: {
+        containerHeight: null
     },
 
     onLoginButton: function (btn) {
@@ -32,8 +37,8 @@ Ext.define('Admin.view.authentication.LoginController', {
             });
 
             Ext.Ajax.request({
-                //url: '/user/signin',
-                url: 'resources/data/authentication/login/success.json',
+                url: '/user/signin',
+                //url: 'resources/data/authentication/login/success.json',
                 method: 'post',
                 jsonData: form.getValues()
             }).then(function (response, opts) {
@@ -55,6 +60,18 @@ Ext.define('Admin.view.authentication.LoginController', {
         }
     },
 
+    onFieldFocus: function (field) {
+        if (Ext.platformTags.desktop) {
+            return;
+        }
+
+        var me = this;
+
+        setTimeout(function () {
+            me.fieldMoveTop(field);
+        }, 700);
+    },
+
     fieldKeyUp: function (field, e) {
         var btn;
 
@@ -63,5 +80,40 @@ Ext.define('Admin.view.authentication.LoginController', {
 
             !btn.getDisabled() && btn.fireEvent('tap');
         }
+    },
+
+    onContainerResize: function (cmp) {
+        if (Ext.platformTags.desktop) {
+            return;
+        }
+
+        this.setContainerHeight(cmp.getSize().height);
+    },
+
+
+    updateContainerHeight: function (height, oldValue) {
+        if (oldValue === undefined) {
+            return;
+        }
+
+        var refs = this.getReferences();
+
+        // Верхняя панель
+        if (height < 300) {
+            refs.adminMainBar.setHeight(0);
+        } else {
+            refs.adminMainBar.setHeight(60);
+        }
+    },
+
+    fieldMoveTop: function (field) {
+        var scroller = field.up('formpanel').getScrollable(),
+            offset = field.element.getY();
+
+        if (offset > 10) {
+            offset -= 10;
+        }
+
+        scroller.scrollTo(null, scroller.position.y + offset, true);
     }
 });
