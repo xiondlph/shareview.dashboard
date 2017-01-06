@@ -9,5 +9,20 @@ Ext.define('Admin.Model.Profile', {
     fields: [
         {   name:   'email',    type: 'string', allowBlank: false   },
         {   name:   'address', type: 'string', allowBlank: false   }
-    ]
+    ],
+
+    validators: {
+        email: [{
+            type: 'presence',
+            message: 'Следует указать E-Mail'
+        }, {
+            type: 'format',
+            matcher: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: 'Неверный формат E-Mail'
+        }],
+        address: {
+            type: 'presence',
+            message: 'Следует указать IP адрес'
+        }
+    }
 });

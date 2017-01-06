@@ -19,26 +19,6 @@ Ext.define('Admin.store.Navigation', {
             iconCls: 'x-fa fa-credit-card',
             viewType: 'payment',
             leaf: true
-        }, {
-            text: 'Профиль',
-            iconCls: 'x-fa fa-user',
-            viewType: 'profile',
-            leaf: true
-        }, {
-            text: 'Оплата',
-            iconCls: 'x-fa fa-credit-card',
-            viewType: 'payment',
-            leaf: true
-        }, {
-            text: 'Профиль',
-            iconCls: 'x-fa fa-user',
-            viewType: 'profile',
-            leaf: true
-        }, {
-            text: 'Оплата',
-            iconCls: 'x-fa fa-credit-card',
-            viewType: 'payment',
-            leaf: true
         }]
     }
 });

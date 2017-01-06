@@ -21,7 +21,6 @@ Ext.define('Admin.view.dashboard.Dashboard',{
     cls: 'admin-dashboard',
     scrollable: true,
     listeners: {
-        resize: 'onContainerResize',
         painted: 'onDashboardPainted'
     },
 
@@ -34,14 +33,7 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             xtype: 'component',
             reference: 'adminLogo',
             cls: 'admin-dashboard-logo',
-            html: 'Shareview',
-            hidden: true,
-            plugins: 'responsive',
-            responsiveConfig: {
-                'desktop': {
-                    hidden: false
-                }
-            }
+            html: 'Shareview'
         }, {
             xtype: 'button',
             ui: 'header',
@@ -69,25 +61,7 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         cls: 'main-dashboard-menu',
         reference: 'menu',
         shadow: true,
-        floated: true,
-        plugins: 'responsive',
-        responsiveConfig: {
-            'desktop': {
-                floated: false
-            }
-        },
         items: [{
-            xtype: 'component',
-            cls: 'admin-dashboard-logo',
-            html: 'Shareview',
-            hidden: false,
-            plugins: 'responsive',
-            responsiveConfig: {
-                'desktop': {
-                    hidden: true
-                }
-            }
-        }, {
             xtype: 'treelist',
             cls: 'main-dashboard-menu-navigation',
             reference: 'navigation',
@@ -101,9 +75,9 @@ Ext.define('Admin.view.dashboard.Dashboard',{
             store: 'Navigation'
         }]
     }, {
-        xtype: 'navigationview',
-        navigationBar: false,
+        xtype: 'container',
         reference: 'card',
+        cls: 'admin-dashboard-card',
         flex: 1,
         layout: {
             type: 'card',

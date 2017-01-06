@@ -15,8 +15,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     },
 
     config: {
-        showNavigation: false,
-        containerHeight: null
+        showNavigation: false
     },
 
     onNavigationItemClick: Ext.emptyFn,
@@ -131,30 +130,6 @@ Ext.define('Admin.view.dashboard.DashboardController', {
 
         card.setActiveItem(item);
         navigation.setSelection(node);
-    },
-
-    onContainerResize: function (cmp) {
-        if (Ext.platformTags.desktop) {
-            return;
-        }
-
-        this.setContainerHeight(cmp.getSize().height);
-    },
-
-
-    updateContainerHeight: function (height, oldValue) {
-        if (oldValue === undefined) {
-            return;
-        }
-
-        var refs = this.getReferences();
-
-        // Верхняя панель
-        if (height < 300) {
-            refs.adminMainBar.setHeight(0);
-        } else {
-            refs.adminMainBar.setHeight(60);
-        }
     },
 
     onDashboardPainted: function () {

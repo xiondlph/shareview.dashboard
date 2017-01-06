@@ -24,11 +24,25 @@ Ext.define('Admin.view.profile.ProfileController', {
         var me          = this,
             refs        = me.getReferences(),
             vm          = me.getViewModel(),
-            profile     = vm.get('profile');
+            profile     = vm.get('profile'),
+            fields      = refs.setting.getFields(),
+            prop;
 
         me.callParent([ view ]);
 
-        refs.setting.setRecord(profile);
+        vm.setLinks({
+            setting: {
+                reference: 'Admin.Model.Profile',
+                create: profile.getData()
+            }
+        });
+
+        // Ручное поднятие плейсхолдеров
+        for (prop in fields) {
+            if (fields.hasOwnProperty(prop)) {
+                fields[prop].animatePlaceholderToLabel();
+            }
+        }
     },
 
     fieldKeyUp: function (field, e) {
@@ -43,15 +57,53 @@ Ext.define('Admin.view.profile.ProfileController', {
 
     onSettingButton: function (btn) {
         var me      = this,
-            refs    = me.getReferences();
+            vm      = me.getViewModel(),
+            refs    = me.getReferences(),
+            form    = refs.setting,
+            record  = vm.get('setting'),
+            validate,
+            changes;
 
-        console.log(refs.setting.getValues());
+        if (!record.dirty) {
+            return;
+        }
+
+        validate = record.validate();
+
+        if (validate.isValid()) {
+            form.setMasked({
+                xtype: 'loadmask',
+                message: 'Сохранение...'
+            });
+
+            Ext.Ajax.request({
+                //url: '/api/profile',
+                url: 'resources/data/authentication/login/success.json',
+                method: 'post',
+                jsonData: record.getChanges()
+            }).then(function (response, opts) {
+                var data = Ext.decode(response.responseText);
+                form.setMasked(false);
+
+                if (data.success) {
+                    vm.get('profile').set(record.getChanges());
+                    record.commit();
+                } else {
+                    Admin.Overlay();
+                }
+            }, function (response, opts) {
+                form.setMasked(false);
+            });
+        } else {
+            validate.each(function (item) {
+                form.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
+            });
+        }
+
     },
 
     onPasswordButton: function (btn) {
         var me      = this,
             refs    = me.getReferences();
-
-        console.log(refs.password.getValues());
     }
 });

@@ -14,7 +14,7 @@ Ext.define('Admin.view.profile.Profile',{
         type: 'profile-profile'
     },
 
-    layout: 'float',
+    //layout: 'float',
     padding: 10,
     defaults: {
         margin: 10,
@@ -41,18 +41,23 @@ Ext.define('Admin.view.profile.Profile',{
             label: 'Email',
             name: 'email',
             clearIcon: false,
-            labelAlign: 'placeholder'
+            labelAlign: 'placeholder',
+            bind: '{setting.email}'
         }, {
             xtype: 'textfield',
             label: 'IP адрес',
             name: 'address',
             clearIcon: false,
-            labelAlign: 'placeholder'
+            labelAlign: 'placeholder',
+            bind: '{setting.address}'
         }, {
             xtype: 'button',
             itemId: 'settingBtn',
             text: 'Сохранить',
-            margin: '20 0 0 0'
+            margin: '20 0 0 0',
+            bind: {
+                disabled: '{!isFilled}'
+            }
         }]
     }, {
         xtype: 'formpanel',
