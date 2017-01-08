@@ -19,40 +19,20 @@ Ext.define('Admin.view.authentication.LoginController', {
     onLoginButton: function (btn) {
         var me = this,
             refs = me.getReferences(),
-            form = refs.adminLoginForm,
-            vm = me.getViewModel(),
-            auth = vm.get('auth'),
-            validate = auth.validate(),
-            firstErrField;
+            form = refs.adminLoginForm;
 
-        if (validate.isValid()) {
-            form.setMasked({
-                xtype: 'loadmask',
-                message: 'Авторизация...'
-            });
-
-            Ext.Ajax.request({
-                //url: '/user/signin',
-                url: 'resources/data/authentication/login/success.json',
-                method: 'post',
-                jsonData: form.getValues()
-            }).then(function (response, opts) {
-                var data = Ext.decode(response.responseText);
-                form.setMasked(false);
-
+        form.submitExt({
+            //url: '/user/signin',
+            url: 'resources/data/authentication/login/success.json',
+            waitMsg: 'Авторизация...',
+            success: function (data) {
                 if (data.success) {
                     me.getView().fireEvent('auth', data);
                 } else {
                     Admin.Overlay('Неверные E-mail или пароль');
                 }
-            }, function (response, opts) {
-                form.setMasked(false);
-            });
-        } else {
-            validate.each(function (item) {
-                form.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
-            });
-        }
+            }
+        });
     },
 
     fieldKeyUp: function (field, e) {

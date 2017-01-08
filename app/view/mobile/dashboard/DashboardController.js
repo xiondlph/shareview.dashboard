@@ -1,6 +1,6 @@
-Ext.define('Admin.view.dashboard.DashboardController', {
+Ext.define('Admin.view.mobile.dashboard.DashboardController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.dashboard-dashboard',
+    alias: 'controller.mobile-dashboard-dashboard',
 
     listen : {
         controller : {
@@ -15,7 +15,8 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     },
 
     config: {
-        showNavigation: false
+        showNavigation: false,
+        containerHeight: null
     },
 
     onToggleNavigationSize: function () {
@@ -30,15 +31,30 @@ Ext.define('Admin.view.dashboard.DashboardController', {
         var me = this,
             refs = this.getReferences();
 
-        refs.adminLogo.toggleCls('admin-dashboard-logo-collapsed');
-        refs.adminMenu.toggleCls('admin-dashboard-menu-collapsed');
-        refs.adminMenu.element.on({
-            transitionend: function () {
-                refs.adminNavigation.setMicro(showNavigation);
-            },
+        Ext.Viewport.setMasked(true);
+        Ext.Viewport.getMasked().element.on({
+            tap: me.onToggleNavigationSize,
+            scope: me,
             single: true
         });
 
+        if (showNavigation) {
+            refs.adminMenu.show();
+            refs.adminMenu.translate(-200, 0);
+            refs.adminMenu.translate(0, 0, {duration: 200});
+            refs.adminCard.translate(180, 0, {duration: 200});
+            refs.adminMainBar.translate(180, 0, {duration: 200});
+        } else {
+            refs.adminMenu.getTranslatable().on('animationend', function() {
+                refs.adminMenu.hide();
+                Ext.Viewport.setMasked(false);
+            }, me, {
+                single: true
+            });
+            refs.adminMenu.translate(-200, 0, {duration: 200});
+            refs.adminCard.translate(0, 0, {duration: 200});
+            refs.adminMainBar.translate(0, 0, {duration: 200});
+        }
     },
 
     onNavigationItemClick: Ext.emptyFn,
@@ -105,6 +121,25 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     onDashboardPainted: function () {
         if (!window.location.hash) {
             this.redirectTo("profile");
+        }
+    },
+
+    onContainerResize: function (cmp) {
+        this.setContainerHeight(cmp.getSize().height);
+    },
+
+    updateContainerHeight: function (height, oldValue) {
+        if (oldValue === undefined) {
+            return;
+        }
+
+        var refs = this.getReferences();
+
+        // Верхняя панель
+        if (height < 300) {
+            refs.adminMainBar.setHeight(0);
+        } else {
+            refs.adminMainBar.setHeight(60);
         }
     }
 });

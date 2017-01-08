@@ -3,7 +3,7 @@ Ext.define('Admin.view.mobile.authentication.Login',{
 
     requires: [
         'Admin.view.mobile.authentication.LoginController',
-        'Admin.view.mobile.authentication.LoginModel'
+        'Admin.view.authentication.LoginModel'
     ],
 
     controller: 'mobile-authentication-login',
@@ -11,24 +11,19 @@ Ext.define('Admin.view.mobile.authentication.Login',{
         type: 'authentication-login'
     },
 
-    padding: 0,
+    cls: 'admin-auth',
+    fullscreen: true,
+    scrollable: {
+        direction: 'vertical'
+    },
 
     items: [{
-        xtype: 'toolbar',
-        docked: 'top',
-        reference: 'adminMainBar',
-        cls: 'admin-auth-bar',
-        items: [{
-            xtype: 'component',
-            cls: 'admin-auth-logo',
-            html: 'Shareview'
-        }]
-    }, {
         xtype: 'formpanel',
         reference: 'adminLoginForm',
-        height: '100%',
-        width: '100%',
-        padding: 20,
+        padding: 10,
+        bind: {
+            record: '{auth}'
+        },
         items: [{
             padding: '0 0 10 0',
             html: 'Вход в личный кабинет'
@@ -66,11 +61,8 @@ Ext.define('Admin.view.mobile.authentication.Login',{
             ui: 'confirm',
             margin: '30 0 0 0',
             bind: {
-                disabled: '{!isFilled}'
+                disabled: '{!isLoginFormFilled}'
             }
         }]
-    }],
-    listeners: {
-        resize: 'onContainerResize'
-    }
+    }]
 });

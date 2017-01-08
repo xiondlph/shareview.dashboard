@@ -1,26 +1,25 @@
 
-Ext.define('Admin.view.dashboard.Dashboard',{
-    extend: 'Ext.Container',
-    xtype: 'admin.dashboard',
+Ext.define('Admin.view.mobile.dashboard.Dashboard',{
+    extend: 'Ext.panel.Panel',
 
     requires: [
-        'Ext.plugin.Responsive',
-        'Admin.ux.list.Tree',
-        'Admin.view.dashboard.DashboardController',
+        'Admin.view.mobile.dashboard.DashboardController',
         'Admin.view.dashboard.DashboardModel'
     ],
 
-    controller: 'dashboard-dashboard',
+    controller: 'mobile-dashboard-dashboard',
     viewModel: {
         type: 'dashboard-dashboard'
     },
 
     listeners: {
+        resize: 'onContainerResize',
         painted: 'onDashboardPainted'
     },
 
     layout: 'hbox',
     cls: 'admin-dashboard',
+    padding: 0,
 
     items: [{
         xtype: 'toolbar',
@@ -28,11 +27,6 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         reference: 'adminMainBar',
         cls: 'admin-dashboard-bar',
         items: [{
-            xtype: 'component',
-            reference: 'adminLogo',
-            cls: 'admin-dashboard-logo',
-            html: 'Shareview'
-        }, {
             xtype: 'button',
             ui: 'header',
             iconCls: 'x-fa fa-bars',
@@ -54,14 +48,20 @@ Ext.define('Admin.view.dashboard.Dashboard',{
                 tap: 'onLogout'
             }
         }]
-    }, {
+    },  {
         xtype: 'container',
         cls: 'admin-dashboard-menu',
         reference: 'adminMenu',
+        floated: true,
+        height: '100%',
         scrollable: {
             direction: 'vertical'
         },
         items: [{
+            xtype: 'component',
+            cls: 'admin-dashboard-logo',
+            html: 'Shareview'
+        }, {
             xtype: 'admin.treelist',
             cls: 'admin-dashboard-menu-navigation',
             reference: 'adminNavigation',

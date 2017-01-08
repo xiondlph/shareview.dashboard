@@ -20,27 +20,25 @@ Ext.define('Admin.view.authentication.Login',{
         align: 'center'
     },
 
+    cls: 'admin-auth',
+    fullscreen: true,
+    scrollable: {
+        direction: 'vertical'
+    },
     items: [{
-        xtype: 'toolbar',
-        docked: 'top',
-        reference: 'adminMainBar',
-        cls: 'admin-auth-bar',
-        items: [{
-            xtype: 'component',
-            cls: 'admin-auth-logo',
-            html: 'Shareview'
-        }]
+        padding: '0 0 10 0',
+        html: 'Вход в личный кабинет'
     }, {
         xtype: 'formpanel',
         reference: 'adminLoginForm',
         height: 'auto',
         width: 500,
         padding: 30,
+        bind: {
+            record: '{auth}'
+        },
         shadow: true,
         items: [{
-            padding: '0 0 10 0',
-            html: 'Вход в личный кабинет'
-        }, {
             xtype: 'textfield',
             name: 'email',
             label: 'E-Mail',
@@ -74,7 +72,7 @@ Ext.define('Admin.view.authentication.Login',{
             ui: 'confirm',
             margin: '30 0 0 0',
             bind: {
-                disabled: '{!isFilled}'
+                disabled: '{!isLoginFormFilled}'
             }
         }]
     }]

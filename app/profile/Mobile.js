@@ -7,6 +7,7 @@ Ext.define('Admin.profile.Mobile', {
 
     views: {
         login: 'Admin.view.mobile.authentication.Login',
+        'admin.dashboard': 'Admin.view.mobile.dashboard.Dashboard',
         profile: 'Admin.view.mobile.profile.Profile'
     },
 

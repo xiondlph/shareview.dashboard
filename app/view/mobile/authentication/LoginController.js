@@ -17,47 +17,23 @@ Ext.define('Admin.view.mobile.authentication.LoginController', {
         }
     },
 
-    config: {
-        containerHeight: null
-    },
-
     onLoginButton: function (btn) {
         var me = this,
             refs = me.getReferences(),
-            form = refs.adminLoginForm,
-            vm = me.getViewModel(),
-            auth = vm.get('auth'),
-            validate = auth.validate(),
-            firstErrField;
+            form = refs.adminLoginForm;
 
-        if (validate.isValid()) {
-            form.setMasked({
-                xtype: 'loadmask',
-                message: 'Авторизация...'
-            });
-
-            Ext.Ajax.request({
-                url: '/user/signin',
-                //url: 'resources/data/authentication/login/success.json',
-                method: 'post',
-                jsonData: form.getValues()
-            }).then(function (response, opts) {
-                var data = Ext.decode(response.responseText);
-                form.setMasked(false);
-
+        form.submitExt({
+            //url: '/user/signin',
+            url: 'resources/data/authentication/login/success.json',
+            waitMsg: 'Авторизация...',
+            success: function (data) {
                 if (data.success) {
                     me.getView().fireEvent('auth', data);
                 } else {
                     Admin.Overlay('Неверные E-mail или пароль');
                 }
-            }, function (response, opts) {
-                form.setMasked(false);
-            });
-        } else {
-            validate.each(function (item) {
-                form.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
-            });
-        }
+            }
+        });
     },
 
     onFieldFocus: function (field) {
@@ -82,32 +58,8 @@ Ext.define('Admin.view.mobile.authentication.LoginController', {
         }
     },
 
-    onContainerResize: function (cmp) {
-        if (Ext.platformTags.desktop) {
-            return;
-        }
-
-        this.setContainerHeight(cmp.getSize().height);
-    },
-
-
-    updateContainerHeight: function (height, oldValue) {
-        if (oldValue === undefined) {
-            return;
-        }
-
-        var refs = this.getReferences();
-
-        // Верхняя панель
-        if (height < 300) {
-            refs.adminMainBar.setHeight(0);
-        } else {
-            refs.adminMainBar.setHeight(60);
-        }
-    },
-
     fieldMoveTop: function (field) {
-        var scroller = field.up('formpanel').getScrollable(),
+        var scroller = this.getView().getScrollable(),
             offset = field.element.getY();
 
         if (offset > 10) {

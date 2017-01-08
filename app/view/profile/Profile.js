@@ -14,20 +14,23 @@ Ext.define('Admin.view.profile.Profile',{
         type: 'profile-profile'
     },
 
-    //layout: 'float',
+    scrollable: {
+        direction: 'vertical'
+    },
+
     padding: 10,
     defaults: {
         margin: 10,
-        padding: 30,
-        //shadow: true,
+        padding: 10,
+        cls: 'admin-dashboard-form',
         plugins: 'responsive',
         responsiveConfig: {
             'width <= 800': {
-                width: 'calc(100% - 20px)'
+                userCls: 'big'
             },
 
             'width > 800': {
-                width: 'calc(50% - 20px)'
+                userCls: 'small'
             }
         }
     },
@@ -35,6 +38,9 @@ Ext.define('Admin.view.profile.Profile',{
     items: [{
         xtype: 'formpanel',
         reference: 'setting',
+        bind: {
+            record: '{setting}'
+        },
         //title: 'Настройки',
         items: [{
             xtype: 'textfield',

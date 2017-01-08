@@ -9,7 +9,7 @@ Ext.define('Admin.view.authentication.LoginModel', {
     },
 
     formulas: {
-        isFilled: function (get) {
+        isLoginFormFilled: function (get) {
             return Boolean(get('auth.email') && get('auth.password'));
         }
     }

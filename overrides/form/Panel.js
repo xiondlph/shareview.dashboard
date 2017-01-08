@@ -1,31 +1,50 @@
 Ext.define('Admin.override.form.Panel', {
     override: 'Ext.form.Panel',
 
-    loadRecord: function (record) {
-        if (!record || !record.data) {
+    submitExt: function (options) {
+        var me          = this,
+            record      = me.getRecord(),
+            validate    = record.validate();
+
+        if (!record.dirty) {
             return;
         }
 
-        var me      = this,
-            fields   = me.getFields(),
-            prop;
+        options = Ext.apply({
+            url : me.getUrl(),
+            method: 'POST',
+            data: record.getChanges(),
+            waitMsg: 'Загрузка...',
+            success: Ext.emptyFn
+        }, options || {});
 
-        me.setRecord(record);
-        for (prop in fields) {
-            if (fields.hasOwnProperty(prop)) {
-                //fields[prop].setValue(record.get(prop));
-                fields[prop].animatePlaceholderToLabel();
-            }
+        if (validate.isValid()) {
+            me.setMasked({
+                xtype: 'loadmask',
+                message: options.waitMsg
+            });
+
+            Ext.Ajax.request({
+                url: options.url,
+                method: options.method,
+                jsonData: options.data
+            }).then(function (response, opts) {
+                var data = Ext.decode(response.responseText);
+                me.setMasked(false);
+
+                if (data.success) {
+                    record.commit();
+                }
+
+                options.success(data);
+            }, function (response, opts) {
+                me.setMasked(false);
+                // TODO: record.reject();
+            });
+        } else {
+            validate.each(function (item) {
+                me.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
+            });
         }
-    },
-
-    getDirtyValues: function () {
-        var me = this,
-            rec = me.getRecord();
-
-        rec.reject(true);
-        rec.set(me.getValues());
-
-        return rec.getChanges();
     }
 });

@@ -30,12 +30,12 @@ Ext.define('Admin.view.profile.ProfileController', {
 
         me.callParent([ view ]);
 
-        vm.setLinks({
-            setting: {
-                reference: 'Admin.Model.Profile',
-                create: profile.getData()
-            }
-        });
+        // vm.setLinks({
+        //     setting: {
+        //         reference: 'Admin.Model.Profile',
+        //         create: profile.getData()
+        //     }
+        // });
 
         // Ручное поднятие плейсхолдеров
         for (prop in fields) {
@@ -49,7 +49,7 @@ Ext.define('Admin.view.profile.ProfileController', {
         var btn;
 
         if( e.event.keyCode === 13) {
-            btn = field.up('formpanel').getComponent('loginbtn');
+            btn = field.up('formpanel').down('button');
 
             !btn.getDisabled() && btn.fireEvent('tap');
         }
@@ -59,47 +59,20 @@ Ext.define('Admin.view.profile.ProfileController', {
         var me      = this,
             vm      = me.getViewModel(),
             refs    = me.getReferences(),
-            form    = refs.setting,
-            record  = vm.get('setting'),
-            validate,
-            changes;
+            form    = refs.setting;
 
-        if (!record.dirty) {
-            return;
-        }
-
-        validate = record.validate();
-
-        if (validate.isValid()) {
-            form.setMasked({
-                xtype: 'loadmask',
-                message: 'Сохранение...'
-            });
-
-            Ext.Ajax.request({
-                //url: '/api/profile',
-                url: 'resources/data/authentication/login/success.json',
-                method: 'post',
-                jsonData: record.getChanges()
-            }).then(function (response, opts) {
-                var data = Ext.decode(response.responseText);
-                form.setMasked(false);
-
+        form.submitExt({
+            url: '/api/profile',
+            //url: 'resources/data/authentication/login/success.json',
+            waitMsg: 'Сохранение...',
+            success: function (data) {
                 if (data.success) {
-                    vm.get('profile').set(record.getChanges());
-                    record.commit();
+                    vm.get('profile').set(form.getValues());
                 } else {
                     Admin.Overlay();
                 }
-            }, function (response, opts) {
-                form.setMasked(false);
-            });
-        } else {
-            validate.each(function (item) {
-                form.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
-            });
-        }
-
+            }
+        });
     },
 
     onPasswordButton: function (btn) {
