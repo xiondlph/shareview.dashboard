@@ -136,7 +136,7 @@ Ext.define('Admin.view.mobile.dashboard.DashboardController', {
         var refs = this.getReferences();
 
         // Верхняя панель
-        if (height < 300) {
+        if (height < 200) {
             refs.adminMainBar.setHeight(0);
         } else {
             refs.adminMainBar.setHeight(60);

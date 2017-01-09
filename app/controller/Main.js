@@ -8,9 +8,8 @@ Ext.define('Admin.controller.Main', {
     onLaunch: function () {
         Admin.Overlay = this.showOverlay;
 
-        this.setAjaxSettings();
-        //this.loadProfile();
-        this.showDashboard();
+        this.loadProfile();
+        //this.showDashboard();
     },
 
     onAuth: function (userData) {
@@ -65,15 +64,17 @@ Ext.define('Admin.controller.Main', {
 
         Ext.Viewport.add(dashboard);
 
-        // dashboard.getViewModel().setLinks({
-        //     profile: {
-        //         reference: 'Admin.Model.Profile',
-        //         create: {
-        //             email: userData.profile.email,
-        //             address: userData.profile.address
-        //         }
-        //     }
-        // });
+        dashboard.getViewModel().setLinks({
+            profile: {
+                reference: 'Admin.Model.Profile',
+                create: {
+                    email: userData.profile.email,
+                    address: userData.profile.address
+                }
+            }
+        });
+
+        this.setAjaxSettings();
     },
 
     /**

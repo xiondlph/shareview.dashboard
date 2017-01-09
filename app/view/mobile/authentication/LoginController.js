@@ -23,8 +23,8 @@ Ext.define('Admin.view.mobile.authentication.LoginController', {
             form = refs.adminLoginForm;
 
         form.submitExt({
-            //url: '/user/signin',
-            url: 'resources/data/authentication/login/success.json',
+            url: '/user/signin',
+            //url: 'resources/data/authentication/login/success.json',
             waitMsg: 'Авторизация...',
             success: function (data) {
                 if (data.success) {

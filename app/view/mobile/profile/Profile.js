@@ -32,36 +32,60 @@ Ext.define('Admin.view.mobile.profile.Profile',{
         iconCls: 'x-fa fa-gear',
         items: [{
             xtype: 'formpanel',
-            items: [
-                {
-                    xtype: 'textfield',
-                    label: 'Title',
-                    labelAlign: 'placeholder'
-                },
-                {
-                    xtype: 'textfield',
-                    label: 'Price',
-                    labelAlign: 'placeholder'
+            reference: 'setting',
+            bind: {
+                record: '{setting}'
+            },
+            defaults: {
+                labelAlign: 'placeholder',
+                autoComplete: false,
+                clearIcon: false
+            },
+            //title: 'Настройки',
+            items: [{
+                xtype: 'textfield',
+                name: 'email',
+                label: 'Email',
+                bind: '{setting.email}'
+            }, {
+                xtype: 'textfield',
+                name: 'address',
+                label: 'Price',
+                bind: '{setting.address}'
+            }, {
+                xtype: 'button',
+                itemId: 'settingBtn',
+                text: 'Сохранить',
+                margin: '20 0 0 0',
+                bind: {
+                    disabled: '{!isFilled}'
                 }
-            ]
+            }]
         }]
     }, {
         title: 'Пароль',
         iconCls: 'x-fa fa-gear',
         items: [{
             xtype: 'formpanel',
-            items: [
-                {
-                    xtype: 'textfield',
-                    label: 'Пароль',
-                    labelAlign: 'placeholder'
-                },
-                {
-                    xtype: 'textfield',
-                    label: 'Подтверждение',
-                    labelAlign: 'placeholder'
-                }
-            ]
+            reference: 'password',
+            default: {
+                labelAlign: 'placeholder',
+                autoComplete: false
+            },
+            items: [{
+                xtype: 'textfield',
+                name: 'password',
+                label: 'Пароль'
+            }, {
+                xtype: 'textfield',
+                name: 'confirm',
+                label: 'Подтверждение'
+            }, {
+                xtype: 'button',
+                itemId: 'passwordBtn',
+                text: 'Сохранить',
+                margin: '20 0 0 0'
+            }]
         }]
     }]
 });

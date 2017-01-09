@@ -44,15 +44,15 @@ Ext.define('Admin.view.profile.Profile',{
         //title: 'Настройки',
         items: [{
             xtype: 'textfield',
-            label: 'Email',
             name: 'email',
+            label: 'Email',
             clearIcon: false,
             labelAlign: 'placeholder',
             bind: '{setting.email}'
         }, {
             xtype: 'textfield',
-            label: 'IP адрес',
             name: 'address',
+            label: 'IP адрес',
             clearIcon: false,
             labelAlign: 'placeholder',
             bind: '{setting.address}'

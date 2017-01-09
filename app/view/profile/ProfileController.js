@@ -30,12 +30,12 @@ Ext.define('Admin.view.profile.ProfileController', {
 
         me.callParent([ view ]);
 
-        // vm.setLinks({
-        //     setting: {
-        //         reference: 'Admin.Model.Profile',
-        //         create: profile.getData()
-        //     }
-        // });
+        vm.setLinks({
+            setting: {
+                reference: 'Admin.Model.Profile',
+                create: profile.getData()
+            }
+        });
 
         // Ручное поднятие плейсхолдеров
         for (prop in fields) {
