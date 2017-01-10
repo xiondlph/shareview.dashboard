@@ -14,10 +14,7 @@ Ext.define('Admin.view.profile.Profile',{
         type: 'profile-profile'
     },
 
-    scrollable: {
-        direction: 'vertical'
-    },
-
+    baseCls: 'admin-dashboard-card-item',
     padding: 10,
     defaults: {
         margin: 10,

@@ -23,9 +23,11 @@ Ext.define('Admin.view.mobile.dashboard.Dashboard',{
 
     items: [{
         xtype: 'toolbar',
-        docked: 'top',
         reference: 'adminMainBar',
+        docked: 'top',
         cls: 'admin-dashboard-bar',
+        padding: 0,
+        height: 60,
         items: [{
             xtype: 'button',
             ui: 'header',
@@ -54,22 +56,28 @@ Ext.define('Admin.view.mobile.dashboard.Dashboard',{
         reference: 'adminMenu',
         floated: true,
         height: '100%',
-        scrollable: {
-            direction: 'vertical'
-        },
         items: [{
             xtype: 'component',
             cls: 'admin-dashboard-logo',
             html: 'Shareview'
         }, {
-            xtype: 'admin.treelist',
-            cls: 'admin-dashboard-menu-navigation',
-            reference: 'adminNavigation',
-            listeners: {
-                itemclick: 'onNavigationItemClick',
-                selectionchange: 'onNavigationSelectionChange'
+            xtype: 'container',
+            height: '100%',
+            cls: 'admin-dashboard-menu-container',
+            padding: '0 0 60 0',
+            scrollable: {
+                direction: 'vertical'
             },
-            store: 'Navigation'
+            items: [{
+                xtype: 'admin.treelist',
+                reference: 'adminNavigation',
+                cls: 'admin-dashboard-menu-navigation',
+                listeners: {
+                    itemclick: 'onNavigationItemClick',
+                    selectionchange: 'onNavigationSelectionChange'
+                },
+                store: 'Navigation'
+            }]
         }]
     }, {
         xtype: 'container',

@@ -8,6 +8,7 @@ Ext.define('Admin.controller.Main', {
     onLaunch: function () {
         Admin.Overlay = this.showOverlay;
 
+        this.setAjaxSettings();
         this.loadProfile();
         //this.showDashboard();
     },
@@ -23,8 +24,8 @@ Ext.define('Admin.controller.Main', {
             overlay;
 
         Ext.Ajax.request({
-            //url: '/api/profile'
-            url: 'resources/data/forbidden.json'
+            url: '/api/profile'
+            //url: 'resources/data/forbidden.json'
         }).then(function(response, opts) {
             var data = Ext.decode(response.responseText);
 
@@ -33,13 +34,6 @@ Ext.define('Admin.controller.Main', {
             } else {
                 me.showLoginForm();
             }
-        }, function (response, opts) {
-            if (response.status === 403) {
-                me.showLoginForm();
-                return;
-            }
-
-            Admin.Overlay();
         });
     },
 
@@ -73,8 +67,6 @@ Ext.define('Admin.controller.Main', {
                 }
             }
         });
-
-        this.setAjaxSettings();
     },
 
     /**
@@ -83,7 +75,11 @@ Ext.define('Admin.controller.Main', {
     setAjaxSettings: function () {
         Ext.Ajax.on('requestexception', function(connection, response, options) {
             if (response.status === 403) {
-                // reload
+                if (Ext.Viewport.getActiveItem().xtype === 'admin.dashboard') {
+                    window.location.reload();
+                } else {
+                    this.showLoginForm();
+                }
                 return;
             }
 

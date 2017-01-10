@@ -87,6 +87,7 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
 
         form.submitExt({
             url: '/api/profile',
+            method: 'PUT',
             //url: 'resources/data/authentication/login/success.json',
             waitMsg: 'Сохранение...',
             success: function (data) {

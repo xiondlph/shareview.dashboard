@@ -1,4 +1,3 @@
-
 Ext.define('Admin.view.dashboard.Dashboard',{
     extend: 'Ext.Container',
     xtype: 'admin.dashboard',
@@ -19,14 +18,20 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         painted: 'onDashboardPainted'
     },
 
+    fullscreen: true,
+    scrollable: {
+        direction: 'vertical'
+    },
     layout: 'hbox',
     cls: 'admin-dashboard',
 
     items: [{
         xtype: 'toolbar',
-        docked: 'top',
         reference: 'adminMainBar',
+        docked: 'top',
         cls: 'admin-dashboard-bar',
+        padding: 0,
+        height: 60,
         items: [{
             xtype: 'component',
             reference: 'adminLogo',
@@ -56,11 +61,8 @@ Ext.define('Admin.view.dashboard.Dashboard',{
         }]
     }, {
         xtype: 'container',
-        cls: 'admin-dashboard-menu',
         reference: 'adminMenu',
-        scrollable: {
-            direction: 'vertical'
-        },
+        cls: 'admin-dashboard-menu',
         items: [{
             xtype: 'admin.treelist',
             cls: 'admin-dashboard-menu-navigation',
@@ -74,8 +76,8 @@ Ext.define('Admin.view.dashboard.Dashboard',{
     }, {
         xtype: 'container',
         reference: 'adminCard',
-        cls: 'admin-dashboard-card',
         flex: 1,
+        baseCls: 'admin-dashboard-card',
         layout: {
             type: 'card',
             animation: 'fade'

@@ -1,13 +1,9 @@
 .admin-dashboard {
+    background-color: #32404e;
+
     &-bar {
         transition: height 0.1s;
         overflow: hidden;
-        height: 60px;
-
-        .x-toolbar-inner {
-            min-height: 60px;
-            padding: 0;
-        }
     }
 
     &-logo {
@@ -29,12 +25,27 @@
     }
 
     &-menu {
-        background-color: #32404e !important;
         transition: width 0.3s;
         width: 200px;
 
         &-collapsed {
             width: 60px;
+        }
+
+        &-container {
+            background-color: #32404e;
+        }
+    }
+
+    &-card {
+        &-inner {
+            overflow: visible;
+        }
+
+        &-item-inner {
+            background-color: $layout-card-background-color;
+            overflow: auto;
+            height: auto;
         }
     }
 
