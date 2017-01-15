@@ -22,14 +22,14 @@ Ext.define('Admin.view.authentication.LoginController', {
             form = refs.adminLoginForm;
 
         form.submitExt({
-            //url: '/user/signin',
-            url: 'resources/data/authentication/login/success.json',
+            url: '/user/signin',
+            //url: 'resources/data/authentication/login/success.json',
             waitMsg: 'Авторизация...',
             success: function (data) {
                 if (data.success) {
                     me.getView().fireEvent('auth', data);
                 } else {
-                    Admin.Overlay('Неверные E-mail или пароль');
+                    Admin.Overlay.error('Неверные E-mail или пароль');
                 }
             }
         });

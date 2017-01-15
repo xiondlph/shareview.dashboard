@@ -23,6 +23,10 @@
 	}
 }
 
+.x-mask.x-has-message .x-loading-spinner-outer {
+	height: auto !important;
+}
+
 .x-trigger {
 	&.trigger-glyph {
 		.x-font-icon {

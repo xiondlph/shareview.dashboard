@@ -70,7 +70,7 @@ Ext.define('Admin.view.profile.ProfileController', {
                 if (data.success) {
                     vm.get('profile').set(form.getValues());
                 } else {
-                    Admin.Overlay();
+                    Admin.Overlay.error();
                 }
             }
         });

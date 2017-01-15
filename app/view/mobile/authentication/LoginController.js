@@ -30,7 +30,7 @@ Ext.define('Admin.view.mobile.authentication.LoginController', {
                 if (data.success) {
                     me.getView().fireEvent('auth', data);
                 } else {
-                    Admin.Overlay('Неверные E-mail или пароль');
+                    Admin.Overlay.error('Неверные E-mail или пароль');
                 }
             }
         });
@@ -60,12 +60,8 @@ Ext.define('Admin.view.mobile.authentication.LoginController', {
 
     fieldMoveTop: function (field) {
         var scroller = this.getView().getScrollable(),
-            offset = field.element.getY();
+            offset = scroller.position.y + field.element.getY();
 
-        if (offset > 10) {
-            offset -= 10;
-        }
-
-        scroller.scrollTo(null, scroller.position.y + offset, true);
+        scroller.scrollTo(null,  offset, true);
     }
 });

@@ -13,6 +13,7 @@ Ext.define('Admin.view.mobile.authentication.Login',{
 
     cls: 'admin-auth',
     fullscreen: true,
+    padding: 0,
     scrollable: {
         direction: 'vertical'
     },

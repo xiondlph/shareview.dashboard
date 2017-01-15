@@ -80,31 +80,39 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     onLogout: function () {
         var view = this.getView();
 
-        view.setMasked({
-            xtype: 'loadmask',
-            message: 'Выход...'
-        });
+        Admin.Overlay.confirm('Выйти из панели управления?', function (btn) {
+            if (btn === 'ok') {
+                view.setMasked({
+                    xtype: 'loadmask',
+                    message: 'Выход...'
+                });
 
-        Ext.Ajax.request({
-            url: '/user/signout'
-            //url: 'resources/data/authentication/login/success.json'
-        }).then(function (response, opts) {
-            var data = Ext.decode(response.responseText);
-            view.setMasked(false);
+                Ext.Ajax.request({
+                    url: '/user/signout'
+                    //url: 'resources/data/authentication/login/success.json'
+                }).then(function (response, opts) {
+                    var data = Ext.decode(response.responseText);
+                    view.setMasked(false);
 
-            if (data.success) {
-                window.location.reload();
-            } else {
-                Admin.Overlay();
+                    if (data.success) {
+                        window.location.reload();
+                    } else {
+                        Admin.Overlay.error();
+                    }
+                }, function (response, opts) {
+                    view.setMasked(false);
+                });
             }
-        }, function (response, opts) {
-            view.setMasked(false);
         });
     },
 
     onDashboardPainted: function () {
-        if (!window.location.hash) {
+        var hash = Ext.util.History.getHash();
+
+        if (Ext.isEmpty(hash)) {
             this.redirectTo("profile");
+        } else {
+            this.setCurrentView(hash);
         }
     }
 });

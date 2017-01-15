@@ -1,0 +1,39 @@
+.admin-overlay {
+    background-color: $background-color;
+    text-align: center;
+    padding-top: 20px;
+
+    &-inner {
+        .x-innerhtml {
+            padding-bottom: 10px;
+        }
+    }
+
+    &-glyph {
+        font-size: 4em;
+
+        &-none {
+            display: none;
+        }
+
+        &-success:before {
+            content: "check_circle";
+            color: $confirm-color;
+        }
+
+        &-info:before {
+            content: "info_outline";
+            color: $base-color;
+        }
+
+        &-warning:before {
+            content: "info_outline";
+            color: $accent-color;
+        }
+
+        &-error:before {
+            content: "error_outline";
+            color: $alert-color;
+        }
+    }
+}

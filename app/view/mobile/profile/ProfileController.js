@@ -69,14 +69,15 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
     },
 
     fieldMoveTop: function (field) {
-        var scroller = field.up('formpanel').up().getScrollable(),
-            offset = field.element.getY();
+        var scroller    = field.up('formpanel').up().getScrollable(),
+            offset      = scroller.position.y + field.element.getY(),
+            container   = Ext.Viewport.getActiveItem();
 
-        if (offset > 10) {
-            offset -= 10;
+        if (container && container.element.getHeight() >= 200) {
+            offset -= 60;
         }
 
-        scroller.scrollTo(null, scroller.position.y + offset, true);
+        scroller.scrollTo(null, offset, true);
     },
 
     onSettingButton: function (btn) {
@@ -94,7 +95,7 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
                 if (data.success) {
                     vm.get('profile').set(form.getValues());
                 } else {
-                    Admin.Overlay();
+                    Admin.Overlay.error();
                 }
             }
         });

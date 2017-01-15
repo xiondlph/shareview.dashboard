@@ -2,12 +2,11 @@ Ext.define('Admin.controller.Main', {
     extend: 'Ext.app.Controller',
 
     requires: [
+        'Admin.ux.Overlay',
         'Admin.view.authentication.Login'
     ],
 
     onLaunch: function () {
-        Admin.Overlay = this.showOverlay;
-
         this.setAjaxSettings();
         this.loadProfile();
         //this.showDashboard();
@@ -20,8 +19,7 @@ Ext.define('Admin.controller.Main', {
     },
     
     loadProfile: function () {
-        var me = this,
-            overlay;
+        var me = this;
 
         Ext.Ajax.request({
             url: '/api/profile'
@@ -83,27 +81,7 @@ Ext.define('Admin.controller.Main', {
                 return;
             }
 
-            Admin.Overlay();
+            Admin.Overlay.error();
         }, this);
-    },
-
-    showOverlay: function (message) {
-        var me = this,
-            msg = message || 'Действие временно недоступно.<br />Попробуйте повторить позже!',
-            overlay = Ext.create('Ext.ActionSheet', {
-                items: [{
-                    xtype: 'label',
-                    html: msg
-                }, {
-                    text: 'OK',
-                    scope: me,
-                    handler: function() {
-                        overlay.hide();
-                    }
-                }]
-            });
-
-        Ext.Viewport.add(overlay);
-        overlay.show();
     }
 });
