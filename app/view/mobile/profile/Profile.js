@@ -50,8 +50,9 @@ Ext.define('Admin.view.mobile.profile.Profile',{
             }, {
                 xtype: 'textfield',
                 name: 'address',
-                label: 'Price',
-                bind: '{setting.address}'
+                label: 'IP Адрес',
+                bind: '{setting.address}',
+                help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
             }, {
                 xtype: 'button',
                 itemId: 'settingBtn',
@@ -64,21 +65,19 @@ Ext.define('Admin.view.mobile.profile.Profile',{
         }]
     }, {
         title: 'Пароль',
-        iconCls: 'x-fa fa-gear',
+        iconCls: 'x-fa fa-lock',
         items: [{
             xtype: 'formpanel',
             reference: 'password',
-            default: {
-                labelAlign: 'placeholder',
-                autoComplete: false
-            },
             items: [{
-                xtype: 'textfield',
+                xtype: 'passwordfield',
                 name: 'password',
+                labelAlign: 'placeholder',
                 label: 'Пароль'
             }, {
-                xtype: 'textfield',
+                xtype: 'passwordfield',
                 name: 'confirm',
+                labelAlign: 'placeholder',
                 label: 'Подтверждение'
             }, {
                 xtype: 'button',

@@ -33,8 +33,22 @@
 			color: $trigger-glyph-color;
 		}
 
-		&.trigger-invalid {
-			.x-font-icon {
+		&-invalid {
+			&.x-interactive {
+				&:active {
+					.x-icon-el {
+						color: $trigger-invalid-color;
+					}
+				}
+
+				&:hover {
+					.x-icon-el {
+						color: $trigger-invalid-color;
+					}
+				}
+			}
+
+			.x-icon-el {
 				color: $trigger-invalid-color;
 
 				&:before {
@@ -43,16 +57,10 @@
 			}
 		}
 
-		&.x-interactive {
-			&:active {
-				.x-icon-el {
-					color: $trigger-invalid-color;
-				}
-			}
-
-			&:hover {
-				.x-icon-el {
-					color: $trigger-invalid-color;
+		&-help {
+			.x-font-icon {
+				&:before {
+					content: "help_outline";
 				}
 			}
 		}

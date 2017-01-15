@@ -25,9 +25,7 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
         var me          = this,
             refs        = me.getReferences(),
             vm          = me.getViewModel(),
-            profile     = vm.get('profile'),
-            fields      = refs.setting.getFields(),
-            prop;
+            profile     = vm.get('profile');
 
         me.callParent([ view ]);
 
@@ -38,12 +36,7 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
             }
         });
 
-        // Ручное поднятие плейсхолдеров
-        for (prop in fields) {
-            if (fields.hasOwnProperty(prop)) {
-                fields[prop].animatePlaceholderToLabel();
-            }
-        }
+        refs.setting.updatePlaceholderState();
     },
 
     onFieldFocus: function (field) {

@@ -8,9 +8,17 @@ Ext.define('Admin.override.field.Text', {
     },
 
     config: {
+        help: null,
         triggers: {
+            help: {
+                cls: 'trigger-glyph trigger-glyph-help',
+                hidden: true,
+                handler: function () {
+                    this.showHelp();
+                }
+            },
             invalid: {
-                cls: 'trigger-glyph trigger-invalid',
+                cls: 'trigger-glyph trigger-glyph-invalid',
                 hidden: true,
                 handler: function () {
                     this.showValidationMsg();
@@ -19,6 +27,18 @@ Ext.define('Admin.override.field.Text', {
         },
 
         validationMsg: ''
+    },
+
+    applyHelp: function (help) {
+        if (help) {
+            this.getTriggers().help.show();
+        }
+
+        return help;
+    },
+
+    updatePlaceholderState: function () {
+        Ext.isEmpty(this.value) && this.animatePlaceholderToLabel();
     },
 
     markInvalid: function (Msg) {
@@ -35,5 +55,9 @@ Ext.define('Admin.override.field.Text', {
 
     showValidationMsg: function () {
         Ext.toast(this.getValidationMsg(), 30000);
+    },
+
+    showHelp: function () {
+        Ext.toast(this.getHelp(), 30000);
     }
 });

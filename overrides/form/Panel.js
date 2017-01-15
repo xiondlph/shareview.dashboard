@@ -46,5 +46,17 @@ Ext.define('Admin.override.form.Panel', {
                 me.down("field[name='"+item.field+"']").markInvalid(item.msg || item[0].msg);
             });
         }
+    },
+
+    // Ручное поднятие плейсхолдеров
+    updatePlaceholderState: function () {
+        var fields = this.getFields(),
+            prop;
+
+        for (prop in fields) {
+            if (fields.hasOwnProperty(prop)) {
+                fields[prop].updatePlaceholderState();
+            }
+        }
     }
 });
