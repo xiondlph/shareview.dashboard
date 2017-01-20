@@ -46,6 +46,7 @@ Ext.define('Admin.view.authentication.Login',{
             clearIcon: false,
             autoComplete: false,
             bind: '{auth.email}',
+            vtype: 'email',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-email'

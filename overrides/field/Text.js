@@ -8,7 +8,7 @@ Ext.define('Admin.override.field.Text', {
 
     listeners: {
         change: function () {
-            this.unMarkInvalid();
+            this.clearInvalid();
         }
     },
 
@@ -49,7 +49,7 @@ Ext.define('Admin.override.field.Text', {
             format  = Ext.String.format,
             errors  = [],
             trimmed, isBlank;
-debugger;
+
         trimmed = Ext.String.trim(value);
 
         if (trimmed.length < 1) {
@@ -81,7 +81,32 @@ debugger;
     },
 
     isValid: function () {
-        return false;
+        var me = this,
+            value = me.getValue(),
+            errors = me.getErrors(value);
+
+        return Ext.isEmpty(errors);
+    },
+
+    validate: function() {
+        var me = this,
+            value = me.getValue(),
+            errors = me.getErrors(value),
+            isValid = Ext.isEmpty(errors);
+
+        if (isValid) {
+            me.clearInvalid();
+        } else {
+            me.markInvalid(errors);
+        }
+
+        return isValid;
+    },
+
+    onBlur: function(e) {
+        this.callParent([e]);
+
+        this.validate();
     },
 
     applyHelp: function (help) {
@@ -101,19 +126,21 @@ debugger;
 
         me.addCls('x-invalid');
         me.getTriggers().invalid.show();
-        me.setValidationMsg(Msg);
 
-        me.up('formpanel') && me.up('formpanel').fireEvent('validitychange');
+        me.fireEvent('validitychange');
     },
 
-    unMarkInvalid: function () {
+    clearInvalid: function () {
         this.removeCls('x-invalid');
         this.getTriggers().invalid.hide();
-        this.setValidationMsg('');
     },
 
     showValidationMsg: function () {
-        Ext.toast(this.getValidationMsg(), 30000);
+        var me = this,
+            value = me.getValue(),
+            errors = me.getErrors(value);
+
+        Ext.toast(errors.join('\n'), 30000);
     },
 
     showHelp: function () {
