@@ -24,9 +24,7 @@ Ext.define('Admin.view.profile.ProfileController', {
         var me          = this,
             refs        = me.getReferences(),
             vm          = me.getViewModel(),
-            profile     = vm.get('profile'),
-            fields      = refs.setting.getFields(),
-            prop;
+            profile     = vm.get('profile');
 
         me.callParent([ view ]);
 
@@ -36,13 +34,13 @@ Ext.define('Admin.view.profile.ProfileController', {
                 create: profile.getData()
             }
         });
+    },
 
-        // Ручное поднятие плейсхолдеров
-        for (prop in fields) {
-            if (fields.hasOwnProperty(prop)) {
-                fields[prop].animatePlaceholderToLabel();
-            }
-        }
+    onProfilePainted: function (view) {
+        var me      = this,
+            refs    = me.getReferences();
+
+        //refs.setting.updatePlaceholderState();
     },
 
     fieldKeyUp: function (field, e) {

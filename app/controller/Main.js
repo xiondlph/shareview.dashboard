@@ -22,8 +22,8 @@ Ext.define('Admin.controller.Main', {
         var me = this;
 
         Ext.Ajax.request({
-            url: '/api/profile'
-            //url: 'resources/data/forbidden.json'
+            //url: '/api/profile'
+            url: 'resources/data/forbidden.json'
         }).then(function(response, opts) {
             var data = Ext.decode(response.responseText);
 

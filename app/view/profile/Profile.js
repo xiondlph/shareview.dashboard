@@ -14,6 +14,10 @@ Ext.define('Admin.view.profile.Profile',{
         type: 'profile-profile'
     },
 
+    listeners: {
+        painted: 'onProfilePainted'
+    },
+
     baseCls: 'admin-dashboard-card-item',
     padding: 10,
     defaults: {
@@ -35,6 +39,7 @@ Ext.define('Admin.view.profile.Profile',{
     items: [{
         xtype: 'formpanel',
         reference: 'setting',
+        trackResetOnLoad: true,
         bind: {
             record: '{setting}'
         },
@@ -45,14 +50,16 @@ Ext.define('Admin.view.profile.Profile',{
             label: 'Email',
             clearIcon: false,
             labelAlign: 'placeholder',
-            bind: '{setting.email}'
+            //bind: '{setting.email}'
         }, {
             xtype: 'textfield',
             name: 'address',
             label: 'IP адрес',
             clearIcon: false,
             labelAlign: 'placeholder',
-            bind: '{setting.address}'
+            vtype: 'email',
+            //bind: '{setting.address}',
+            help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
         }, {
             xtype: 'button',
             itemId: 'settingBtn',

@@ -1,6 +1,31 @@
 Ext.define('Admin.override.form.Panel', {
     override: 'Ext.form.Panel',
 
+    listeners: {
+        validitychange: function () {
+            this.onValidityChange();
+        }
+    },
+
+    hasInvalidField: function() {
+        var me          = this,
+            hasInvalid  = false,
+            fields      = me.getFields(),
+            props;
+
+        for (props in fields) {
+            if (fields.hasOwnProperty(props) && !fields[props].isValid()) {
+                hasInvalid = true;
+            }
+        }
+
+        return hasInvalid;
+    },
+
+    onValidityChange: function () {
+        console.log(this.hasInvalidField());
+    },
+
     submitExt: function (options) {
         var me          = this,
             record      = me.getRecord(),
@@ -55,8 +80,23 @@ Ext.define('Admin.override.form.Panel', {
 
         for (prop in fields) {
             if (fields.hasOwnProperty(prop)) {
+                fields[prop].commitValue();
+            }
+        }
+    },
+
+    setValues: function(values) {
+        var fields = this.getFields(),
+            prop;
+
+        this.callParent(arguments);
+
+        for (prop in fields) {
+            if (fields.hasOwnProperty(prop)) {
                 fields[prop].updatePlaceholderState();
             }
         }
+
+        return this;
     }
 });
