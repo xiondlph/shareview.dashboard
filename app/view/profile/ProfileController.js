@@ -28,19 +28,7 @@ Ext.define('Admin.view.profile.ProfileController', {
 
         me.callParent([ view ]);
 
-        vm.setLinks({
-            setting: {
-                reference: 'Admin.Model.Profile',
-                create: profile.getData()
-            }
-        });
-    },
-
-    onProfilePainted: function (view) {
-        var me      = this,
-            refs    = me.getReferences();
-
-        //refs.setting.updatePlaceholderState();
+        refs.setting.setRecord(profile);
     },
 
     fieldKeyUp: function (field, e) {

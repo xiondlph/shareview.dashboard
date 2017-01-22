@@ -6,28 +6,16 @@ Ext.define('Admin.override.field.Text', {
         'Admin.util.form.field.VTypes'
     ],
 
-    listeners: {
-        change: function () {
-            this.clearInvalid();
-        }
-    },
-
     config: {
         help: null,
         triggers: {
             help: {
                 cls: 'trigger-glyph trigger-glyph-help',
-                hidden: true,
-                handler: function () {
-                    this.showHelp();
-                }
+                hidden: true
             },
             invalid: {
                 cls: 'trigger-glyph trigger-glyph-invalid',
-                hidden: true,
-                handler: function () {
-                    this.showValidationMsg();
-                }
+                hidden: true
             }
         },
 
@@ -36,11 +24,28 @@ Ext.define('Admin.override.field.Text', {
 
     allowBlank: true,
     validateBlank: false,
+    validateOnBlur: true,
+    validateOnChange: true,
     vtype: null,
 
     blankText: 'Поле обязательное для заполнения',
     minLengthText: 'Длина текста не должна быть меньше {0} символов',
     maxLengthText: 'Длина текста не должна быть больше {0} символов',
+
+    initialize: function() {
+        var me = this,
+            triggers = me.getTriggers();
+
+        me.callParent();
+
+        me.getComponent().on({
+            change: 'onChange',
+            scope: this
+        });
+
+        triggers.help.setHandler(me.showHelp);
+        triggers.invalid.setHandler(me.showError);
+    },
 
     getErrors: function(value) {
         var me      = this,
@@ -100,13 +105,27 @@ Ext.define('Admin.override.field.Text', {
             me.markInvalid(errors);
         }
 
+        me.up('formpanel') && me.up('formpanel').fireEvent('validitychange');
+
         return isValid;
+    },
+
+    onChange: function (field, value, lastValue) {
+        if (this.getLabelAlign() === 'placeholder' && value && lastValue === null) {
+            this.animatePlaceholderToLabel();
+        }
+
+        if (this.validateOnChange && lastValue !== null) {
+            this.validate();
+        }
     },
 
     onBlur: function(e) {
         this.callParent([e]);
 
-        this.validate();
+        if (this.validateOnBlur) {
+            this.validate();
+        }
     },
 
     applyHelp: function (help) {
@@ -117,17 +136,9 @@ Ext.define('Admin.override.field.Text', {
         return help;
     },
 
-    updatePlaceholderState: function () {
-        !Ext.isEmpty(this.getValue()) && this.animatePlaceholderToLabel();
-    },
-
     markInvalid: function (Msg) {
-        var me = this;
-
-        me.addCls('x-invalid');
-        me.getTriggers().invalid.show();
-
-        me.fireEvent('validitychange');
+        this.addCls('x-invalid');
+        this.getTriggers().invalid.show();
     },
 
     clearInvalid: function () {
@@ -135,16 +146,15 @@ Ext.define('Admin.override.field.Text', {
         this.getTriggers().invalid.hide();
     },
 
-    showValidationMsg: function () {
+    showError: function () {
         var me = this,
             value = me.getValue(),
             errors = me.getErrors(value);
 
-        Ext.toast(errors.join('\n'), 30000);
+        Ext.toast(errors[0], 30000);
     },
 
     showHelp: function () {
-        this.getErrors('');
         Ext.toast(this.getHelp(), 30000);
     }
 });

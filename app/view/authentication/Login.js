@@ -47,6 +47,7 @@ Ext.define('Admin.view.authentication.Login',{
             autoComplete: false,
             bind: '{auth.email}',
             vtype: 'email',
+            allowBlank: false,
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-email'
@@ -59,6 +60,7 @@ Ext.define('Admin.view.authentication.Login',{
             labelAlign: 'placeholder',
             clearIcon: false,
             bind: '{auth.password}',
+            allowBlank: false,
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-password'
@@ -69,12 +71,10 @@ Ext.define('Admin.view.authentication.Login',{
             itemId: 'loginbtn',
             text: 'Вход',
             iconAlign: 'right',
+            formBind: true,
             iconCls: 'x-fa fa-angle-right',
             ui: 'confirm',
-            margin: '30 0 0 0',
-            bind: {
-                disabled: '{!isLoginFormFilled}'
-            }
+            margin: '30 0 0 0'
         }]
     }]
 });

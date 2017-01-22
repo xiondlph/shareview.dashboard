@@ -14,10 +14,6 @@ Ext.define('Admin.view.profile.Profile',{
         type: 'profile-profile'
     },
 
-    listeners: {
-        painted: 'onProfilePainted'
-    },
-
     baseCls: 'admin-dashboard-card-item',
     padding: 10,
     defaults: {
@@ -40,49 +36,42 @@ Ext.define('Admin.view.profile.Profile',{
         xtype: 'formpanel',
         reference: 'setting',
         trackResetOnLoad: true,
-        bind: {
-            record: '{setting}'
+        defaults: {
+            xtype: 'textfield',
+            clearIcon: false,
+            allowBlank: false,
+            labelAlign: 'placeholder'
         },
         //title: 'Настройки',
         items: [{
-            xtype: 'textfield',
             name: 'email',
             label: 'Email',
-            clearIcon: false,
-            labelAlign: 'placeholder',
-            //bind: '{setting.email}'
+            vtype: 'email'
         }, {
-            xtype: 'textfield',
             name: 'address',
             label: 'IP адрес',
-            clearIcon: false,
-            labelAlign: 'placeholder',
-            vtype: 'email',
-            //bind: '{setting.address}',
             help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
         }, {
             xtype: 'button',
+            formBind: true,
             itemId: 'settingBtn',
             text: 'Сохранить',
-            margin: '20 0 0 0',
-            bind: {
-                disabled: '{!isFilled}'
-            }
+            margin: '20 0 0 0'
         }]
     }, {
         xtype: 'formpanel',
         reference: 'password',
+        defaults: {
+            xtype: 'passwordfield',
+            labelAlign: 'placeholder'
+        },
         //title: 'Смена пароля',
         items: [{
-            xtype: 'passwordfield',
             name: 'password',
-            label: 'Новый пароль',
-            labelAlign: 'placeholder'
+            label: 'Новый пароль'
         }, {
-            xtype: 'passwordfield',
             name: 'confirm',
-            label: 'Подтверждение',
-            labelAlign: 'placeholder'
+            label: 'Подтверждение'
         }, {
             xtype: 'button',
             itemId: 'passwordBtn',
