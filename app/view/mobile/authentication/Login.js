@@ -3,13 +3,9 @@ Ext.define('Admin.view.mobile.authentication.Login',{
 
     requires: [
         'Admin.view.mobile.authentication.LoginController',
-        'Admin.view.authentication.LoginModel'
     ],
 
     controller: 'mobile-authentication-login',
-    viewModel: {
-        type: 'authentication-login'
-    },
 
     cls: 'admin-auth',
     fullscreen: true,
@@ -22,20 +18,21 @@ Ext.define('Admin.view.mobile.authentication.Login',{
         xtype: 'formpanel',
         reference: 'adminLoginForm',
         padding: 10,
-        bind: {
-            record: '{auth}'
-        },
-        items: [{
-            padding: '0 0 10 0',
-            html: 'Вход в личный кабинет'
-        }, {
+        defaults: {
             xtype: 'textfield',
-            name: 'email',
-            label: 'E-Mail',
             labelAlign: 'placeholder',
             clearIcon: false,
             autoComplete: false,
-            bind: '{auth.email}',
+            allowBlank: false
+        },
+        items: [{
+            xtype: 'label',
+            padding: '0 0 10 0',
+            html: 'Вход в личный кабинет'
+        }, {
+            name: 'email',
+            label: 'E-Mail',
+            vtype: 'email',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-email'
@@ -45,9 +42,6 @@ Ext.define('Admin.view.mobile.authentication.Login',{
             xtype: 'passwordfield',
             name: 'password',
             label: 'Пароль',
-            labelAlign: 'placeholder',
-            clearIcon: false,
-            bind: '{auth.password}',
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-password'
@@ -58,12 +52,10 @@ Ext.define('Admin.view.mobile.authentication.Login',{
             itemId: 'loginbtn',
             text: 'Вход',
             iconAlign: 'right',
+            formBind: true,
             iconCls: 'x-fa fa-angle-right',
             ui: 'confirm',
-            margin: '30 0 0 0',
-            bind: {
-                disabled: '{!isLoginFormFilled}'
-            }
+            margin: '30 0 0 0'
         }]
     }]
 });

@@ -29,14 +29,7 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
 
         me.callParent([ view ]);
 
-        vm.setLinks({
-            setting: {
-                reference: 'Admin.Model.Profile',
-                create: profile.getData()
-            }
-        });
-
-        refs.setting.updatePlaceholderState();
+        refs.setting.setRecord(profile);
     },
 
     onFieldFocus: function (field) {

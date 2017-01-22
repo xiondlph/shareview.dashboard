@@ -4,15 +4,10 @@ Ext.define('Admin.view.authentication.Login',{
 
     requires: [
         'Ext.plugin.Responsive',
-        'Admin.Model.Auth',
-        'Admin.view.authentication.LoginController',
-        'Admin.view.authentication.LoginModel'
+        'Admin.view.authentication.LoginController'
     ],
 
     controller: 'authentication-login',
-    viewModel: {
-        type: 'authentication-login'
-    },
 
     layout: {
         type: 'vbox',
@@ -34,20 +29,18 @@ Ext.define('Admin.view.authentication.Login',{
         height: 'auto',
         width: 500,
         padding: 30,
-        bind: {
-            record: '{auth}'
-        },
         shadow: true,
-        items: [{
+        defaults: {
             xtype: 'textfield',
-            name: 'email',
-            label: 'E-Mail',
             labelAlign: 'placeholder',
             clearIcon: false,
             autoComplete: false,
-            bind: '{auth.email}',
+            allowBlank: false
+        },
+        items: [{
+            name: 'email',
+            label: 'E-Mail',
             vtype: 'email',
-            allowBlank: false,
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-email'
@@ -57,10 +50,6 @@ Ext.define('Admin.view.authentication.Login',{
             xtype: 'passwordfield',
             name: 'password',
             label: 'Пароль',
-            labelAlign: 'placeholder',
-            clearIcon: false,
-            bind: '{auth.password}',
-            allowBlank: false,
             triggers: {
                 glyphed: {
                     cls: 'trigger-glyph auth-password'
@@ -78,3 +67,4 @@ Ext.define('Admin.view.authentication.Login',{
         }]
     }]
 });
+

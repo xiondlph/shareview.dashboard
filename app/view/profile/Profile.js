@@ -5,14 +5,10 @@ Ext.define('Admin.view.profile.Profile',{
 
     requires: [
         'Ext.layout.Float',
-        'Admin.view.profile.ProfileController',
-        'Admin.view.profile.ProfileModel'
+        'Admin.view.profile.ProfileController'
     ],
 
     controller: 'profile-profile',
-    viewModel: {
-        type: 'profile-profile'
-    },
 
     baseCls: 'admin-dashboard-card-item',
     padding: 10,

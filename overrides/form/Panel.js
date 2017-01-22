@@ -133,7 +133,7 @@ Ext.define('Admin.override.form.Panel', {
             me.setMasked(false);
 
             if (data.success) {
-                // TODO: commit
+                me.setValues(me.getChanges());
             }
 
             options.success(data);
