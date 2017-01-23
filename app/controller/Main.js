@@ -19,17 +19,18 @@ Ext.define('Admin.controller.Main', {
     },
     
     loadProfile: function () {
+        var me = this;
+
         Ext.Ajax.request({
             url: '/api/profile',
             //url: 'resources/data/forbidden.json',
-            scope: this
         }).then(function(response, opts) {
             var data = Ext.decode(response.responseText);
 
             if (data.success) {
-                this.showDashboard(data);
+                me.showDashboard(data);
             } else {
-                this.showLoginForm();
+                me.showLoginForm();
             }
         });
     },

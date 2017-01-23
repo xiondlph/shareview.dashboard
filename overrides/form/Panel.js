@@ -120,8 +120,7 @@ Ext.define('Admin.override.form.Panel', {
         Ext.Ajax.request({
             url: options.url,
             method: options.method,
-            jsonData: options.data,
-            scope: me
+            jsonData: options.data
         }).then(function (response, opts) {
             var data = Ext.decode(response.responseText);
             me.setMasked(false);

@@ -32,12 +32,13 @@ Ext.define('Admin.view.profile.ProfileController', {
     },
 
     fieldKeyUp: function (field, e) {
-        var btn;
+        var form, btn;
 
         if( e.event.keyCode === 13) {
-            btn = field.up('formpanel').down('button');
+            form = field.up('formpanel');
+            btn = form && form.query('[submitBtn]');
 
-            !btn.getDisabled() && btn.fireEvent('tap');
+            btn && !btn.getDisabled() && btn.fireEvent('tap');
         }
     },
 

@@ -38,7 +38,7 @@ Ext.define('Admin.view.profile.Profile',{
             allowBlank: false,
             labelAlign: 'placeholder'
         },
-        //title: 'Настройки',
+        // title: 'Настройки',
         items: [{
             name: 'email',
             label: 'Email',
@@ -46,30 +46,38 @@ Ext.define('Admin.view.profile.Profile',{
         }, {
             name: 'address',
             label: 'IP адрес',
+            vtype: 'IPAddress',
             help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
         }, {
             xtype: 'button',
             formBind: true,
+            submitBtn: true,
             itemId: 'settingBtn',
             text: 'Сохранить',
             margin: '20 0 0 0'
         }]
     }, {
         xtype: 'formpanel',
+        allowBlank: false,
         reference: 'password',
         defaults: {
             xtype: 'passwordfield',
+            allowBlank: false,
             labelAlign: 'placeholder'
         },
-        //title: 'Смена пароля',
+        // title: 'Смена пароля',
         items: [{
             name: 'password',
+            initialPassword: true,
             label: 'Новый пароль'
         }, {
             name: 'confirm',
-            label: 'Подтверждение'
+            label: 'Подтверждение',
+            vtype: 'password'
         }, {
             xtype: 'button',
+            formBind: true,
+            submitBtn: true,
             itemId: 'passwordBtn',
             text: 'Сохранить',
             margin: '20 0 0 0'
