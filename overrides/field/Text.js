@@ -33,24 +33,22 @@ Ext.define('Admin.override.field.Text', {
     maxLengthText: 'Длина текста не должна быть больше {0} символов',
 
     initialize: function() {
-        var me = this,
-            triggers = me.getTriggers();
+        var triggers = this.getTriggers();
 
-        me.callParent();
+        this.callParent();
 
-        me.getComponent().on({
+        this.getComponent().on({
             change: 'onChange',
             scope: this
         });
 
-        triggers.help.setHandler(me.showHelp);
-        triggers.invalid.setHandler(me.showError);
+        triggers.help.setHandler(this.showHelp);
+        triggers.invalid.setHandler(this.showError);
     },
 
     getErrors: function(value) {
-        var me      = this,
-            vtypes  = Admin.form.VTypes,
-            vtype   = me.vtype,
+        var vtypes  = Admin.form.VTypes,
+            vtype   = this.vtype,
             format  = Ext.String.format,
             errors  = [],
             trimmed, isBlank;
@@ -58,27 +56,27 @@ Ext.define('Admin.override.field.Text', {
         trimmed = Ext.String.trim(value);
 
         if (trimmed.length < 1) {
-            if (!me.allowBlank) {
-                errors.push(me.blankText);
+            if (!this.allowBlank) {
+                errors.push(this.blankText);
             }
 
-            if (!me.validateBlank) {
+            if (!this.validateBlank) {
                 return errors;
             }
             isBlank = true;
         }
 
-        if (!isBlank && value.length < me.minLength) {
-            errors.push(format(me.minLengthText, me.minLength));
+        if (!isBlank && value.length < this.minLength) {
+            errors.push(format(this.minLengthText, this.minLength));
         }
 
-        if (value.length > me.maxLength) {
-            errors.push(format(me.maxLengthText, me.maxLength));
+        if (value.length > this.maxLength) {
+            errors.push(format(this.maxLengthText, this.maxLength));
         }
 
         if (vtype) {
-            if (!vtypes[vtype](value, me)) {
-                errors.push(me.vtypeText || vtypes[vtype +'Text']);
+            if (!vtypes[vtype](value, this)) {
+                errors.push(this.vtypeText || vtypes[vtype +'Text']);
             }
         }
 
@@ -86,26 +84,24 @@ Ext.define('Admin.override.field.Text', {
     },
 
     isValid: function () {
-        var me = this,
-            value = me.getValue(),
-            errors = me.getErrors(value);
+        var value = this.getValue(),
+            errors = this.getErrors(value);
 
         return Ext.isEmpty(errors);
     },
 
     validate: function() {
-        var me = this,
-            value = me.getValue(),
-            errors = me.getErrors(value),
+        var value = this.getValue(),
+            errors = this.getErrors(value),
             isValid = Ext.isEmpty(errors);
 
         if (isValid) {
-            me.clearInvalid();
+            this.clearInvalid();
         } else {
-            me.markInvalid(errors);
+            this.markInvalid(errors);
         }
 
-        me.up('formpanel') && me.up('formpanel').fireEvent('validitychange');
+        this.up('formpanel') && this.up('formpanel').fireEvent('validitychange');
 
         return isValid;
     },
@@ -136,7 +132,7 @@ Ext.define('Admin.override.field.Text', {
         return help;
     },
 
-    markInvalid: function (Msg) {
+    markInvalid: function () {
         this.addCls('x-invalid');
         this.getTriggers().invalid.show();
     },
@@ -147,9 +143,8 @@ Ext.define('Admin.override.field.Text', {
     },
 
     showError: function () {
-        var me = this,
-            value = me.getValue(),
-            errors = me.getErrors(value);
+        var value = this.getValue(),
+            errors = this.getErrors(value);
 
         Ext.toast(errors[0], 30000);
     },

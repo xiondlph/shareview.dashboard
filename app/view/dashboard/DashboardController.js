@@ -27,8 +27,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
             return;
         }
 
-        var me = this,
-            refs = this.getReferences();
+        var refs = this.getReferences();
 
         refs.adminLogo.toggleCls('admin-dashboard-logo-collapsed');
         refs.adminMenu.toggleCls('admin-dashboard-menu-collapsed');
@@ -58,8 +57,7 @@ Ext.define('Admin.view.dashboard.DashboardController', {
     setCurrentView: function (hashTag) {
         hashTag = (hashTag || '').toLowerCase();
 
-        var me = this,
-            refs = me.getReferences(),
+        var refs = this.getReferences(),
             adminCard = refs.adminCard,
             adminNavigation = refs.adminNavigation,
             store = adminNavigation.getStore(),

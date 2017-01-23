@@ -22,12 +22,11 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
     },
 
     init: function (view) {
-        var me          = this,
-            refs        = me.getReferences(),
-            vm          = me.getViewModel(),
+        var refs        = this.getReferences(),
+            vm          = this.getViewModel(),
             profile     = vm.get('profile');
 
-        me.callParent([ view ]);
+        this.callParent([ view ]);
 
         refs.setting.setRecord(profile);
     },
@@ -67,9 +66,8 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
     },
 
     onSettingButton: function (btn) {
-        var me      = this,
-            vm      = me.getViewModel(),
-            refs    = me.getReferences(),
+        var vm      = this.getViewModel(),
+            refs    = this.getReferences(),
             form    = refs.setting;
 
         form.submitExt({
@@ -88,7 +86,6 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
     },
 
     onPasswordButton: function (btn) {
-        var me      = this,
-            refs    = me.getReferences();
+        var refs = this.getReferences();
     }
 });

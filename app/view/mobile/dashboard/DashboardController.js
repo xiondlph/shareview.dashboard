@@ -28,13 +28,12 @@ Ext.define('Admin.view.mobile.dashboard.DashboardController', {
             return;
         }
 
-        var me = this,
-            refs = this.getReferences();
+        var refs = this.getReferences();
 
         Ext.Viewport.setMasked(true);
         Ext.Viewport.getMasked().element.on({
-            tap: me.onToggleNavigationSize,
-            scope: me,
+            tap: this.onToggleNavigationSize,
+            scope: this,
             single: true
         });
 
@@ -48,7 +47,7 @@ Ext.define('Admin.view.mobile.dashboard.DashboardController', {
             refs.adminMenu.getTranslatable().on('animationend', function() {
                 refs.adminMenu.hide();
                 Ext.Viewport.setMasked(false);
-            }, me, {
+            }, this, {
                 single: true
             });
             refs.adminMenu.translate(-200, 0, {duration: 200});
@@ -74,8 +73,7 @@ Ext.define('Admin.view.mobile.dashboard.DashboardController', {
     setCurrentView: function (hashTag) {
         hashTag = (hashTag || '').toLowerCase();
 
-        var me = this,
-            refs = me.getReferences(),
+        var refs = this.getReferences(),
             adminCard = refs.adminCard,
             adminNavigation = refs.adminNavigation,
             store = adminNavigation.getStore(),

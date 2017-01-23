@@ -2,20 +2,17 @@ Ext.define('Admin.override.form.Panel', {
     override: 'Ext.form.Panel',
 
     initialize : function() {
-        var me = this;
-
-        me.callParent();
-        me.on({
+        this.callParent();
+        this.on({
             validitychange: 'checkValidity',
             scope: this
         });
 
-        me.onValidityChange(!this.hasInvalidField());
+        this.onValidityChange(!this.hasInvalidField());
     },
 
     hasInvalidField: function() {
-        var me = this,
-            fields = me.getFieldsArray(),
+        var fields = this.getFieldsArray(),
             invalidField;
 
         invalidField = fields.filter(function (field) {
@@ -26,17 +23,16 @@ Ext.define('Admin.override.form.Panel', {
     },
 
     checkValidity: function() {
-        var me = this,
-            valid;
+        var valid;
 
-        if (me.destroyed) {
+        if (this.destroyed) {
             return;
         }
 
-        valid = !me.hasInvalidField();
-        if (valid !== me.wasValid) {
-            me.onValidityChange(valid);
-            me.wasValid = valid;
+        valid = !this.hasInvalidField();
+        if (valid !== this.wasValid) {
+            this.onValidityChange(valid);
+            this.wasValid = valid;
         }
     },
 
@@ -59,20 +55,18 @@ Ext.define('Admin.override.form.Panel', {
     },
 
     getBoundItems: function() {
-        var me = this,
-            boundItems = me._boundItems;
+        var boundItems = this._boundItems;
 
         if (!boundItems || boundItems.getCount() === 0) {
-            boundItems = me._boundItems = new Ext.util.MixedCollection();
-            boundItems.addAll(me.query('[formBind]'));
+            boundItems = this._boundItems = new Ext.util.MixedCollection();
+            boundItems.addAll(this.query('[formBind]'));
         }
 
         return boundItems;
     },
 
     getChanges: function () {
-        var me = this,
-            fields = me.getFields(),
+        var fields = this.getFields(),
             changes = {}, props;
 
         for (props in fields) {
@@ -93,8 +87,7 @@ Ext.define('Admin.override.form.Panel', {
     },
 
     isDirty: function () {
-        var me = this,
-            fields = this.getFieldsArray(),
+        var fields = this.getFieldsArray(),
             dirtyFields;
 
         dirtyFields = fields.filter(function (field) {
@@ -127,7 +120,8 @@ Ext.define('Admin.override.form.Panel', {
         Ext.Ajax.request({
             url: options.url,
             method: options.method,
-            jsonData: options.data
+            jsonData: options.data,
+            scope: me
         }).then(function (response, opts) {
             var data = Ext.decode(response.responseText);
             me.setMasked(false);
