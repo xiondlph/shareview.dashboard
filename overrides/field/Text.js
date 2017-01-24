@@ -17,9 +17,7 @@ Ext.define('Admin.override.field.Text', {
                 cls: 'trigger-glyph trigger-glyph-invalid',
                 hidden: true
             }
-        },
-
-        validationMsg: ''
+        }
     },
 
     allowBlank: true,
@@ -93,21 +91,18 @@ Ext.define('Admin.override.field.Text', {
     validate: function() {
         var value = this.getValue(),
             errors = this.getErrors(value),
-            isValid = Ext.isEmpty(errors);
+            valid = Ext.isEmpty(errors);
 
-        if (isValid) {
-            this.clearInvalid();
-        } else {
-            this.markInvalid(errors);
+        if (valid !== this.wasValid) {
+            this.onValidityChange(valid);
+            this.wasValid = valid;
         }
 
-        this.up('formpanel') && this.up('formpanel').fireEvent('validitychange');
-
-        return isValid;
+        return valid;
     },
 
     onChange: function (field, value, lastValue) {
-        if (this.getLabelAlign() === 'placeholder' && value && lastValue === null) {
+        if (lastValue === null && value && this.getLabelAlign() === 'placeholder') {
             this.animatePlaceholderToLabel();
         }
 
@@ -122,6 +117,16 @@ Ext.define('Admin.override.field.Text', {
         if (this.validateOnBlur) {
             this.validate();
         }
+    },
+
+    onValidityChange: function (valid) {
+        if (valid) {
+            this.clearInvalid();
+        } else {
+            this.markInvalid();
+        }
+
+        this.up('formpanel') && this.up('formpanel').fireEvent('validitychange');
     },
 
     applyHelp: function (help) {

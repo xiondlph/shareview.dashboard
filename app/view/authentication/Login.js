@@ -58,9 +58,10 @@ Ext.define('Admin.view.authentication.Login',{
         }, {
             xtype: 'button',
             itemId: 'loginbtn',
+            formBind: true,
+            submitBtn: true,
             text: 'Вход',
             iconAlign: 'right',
-            formBind: true,
             iconCls: 'x-fa fa-angle-right',
             ui: 'confirm',
             margin: '30 0 0 0'

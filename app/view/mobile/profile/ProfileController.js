@@ -44,12 +44,13 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
     },
 
     fieldKeyUp: function (field, e) {
-        var btn;
+        var form, btn;
 
         if( e.event.keyCode === 13) {
-            btn = field.up('formpanel').down('button');
+            form = field.up('formpanel');
+            btn = form && form.query('[submitBtn]');
 
-            !btn.getDisabled() && btn.fireEvent('tap');
+            btn && btn.length === 1 && !btn[0].getDisabled() && btn[0].fireEvent('tap');
         }
     },
 
@@ -78,6 +79,8 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
             success: function (data) {
                 if (data.success) {
                     vm.get('profile').set(form.getValues());
+                } else if (data.exist) {
+                    Admin.Overlay.error('Этот Email уже используется!');
                 } else {
                     Admin.Overlay.error();
                 }
@@ -86,6 +89,25 @@ Ext.define('Admin.view.mobile.profile.ProfileController', {
     },
 
     onPasswordButton: function (btn) {
-        var refs = this.getReferences();
+        var vm      = this.getViewModel(),
+            refs    = this.getReferences(),
+            form    = refs.password;
+
+        form.submitExt({
+            url: '/api/password',
+            //url: 'resources/data/authentication/login/success.json',
+            method: 'POST',
+            waitMsg: 'Сохранение...',
+            success: function (data) {
+                if (data.success) {
+                    form.setValues({
+                        password: null,
+                        confirm: null
+                    });
+                } else {
+                    Admin.Overlay.error();
+                }
+            }
+        });
     }
 });

@@ -34,9 +34,10 @@ Ext.define('Admin.view.profile.Profile',{
         trackResetOnLoad: true,
         defaults: {
             xtype: 'textfield',
+            labelAlign: 'placeholder',
+            autoComplete: false,
             clearIcon: false,
-            allowBlank: false,
-            labelAlign: 'placeholder'
+            allowBlank: false
         },
         // title: 'Настройки',
         items: [{
@@ -50,9 +51,9 @@ Ext.define('Admin.view.profile.Profile',{
             help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
         }, {
             xtype: 'button',
+            itemId: 'settingBtn',
             formBind: true,
             submitBtn: true,
-            itemId: 'settingBtn',
             text: 'Сохранить',
             margin: '20 0 0 0'
         }]
@@ -62,8 +63,9 @@ Ext.define('Admin.view.profile.Profile',{
         reference: 'password',
         defaults: {
             xtype: 'passwordfield',
-            allowBlank: false,
-            labelAlign: 'placeholder'
+            labelAlign: 'placeholder',
+            autoComplete: false,
+            allowBlank: false
         },
         // title: 'Смена пароля',
         items: [{
@@ -76,9 +78,9 @@ Ext.define('Admin.view.profile.Profile',{
             vtype: 'password'
         }, {
             xtype: 'button',
+            itemId: 'passwordBtn',
             formBind: true,
             submitBtn: true,
-            itemId: 'passwordBtn',
             text: 'Сохранить',
             margin: '20 0 0 0'
         }]

@@ -49,12 +49,13 @@ Ext.define('Admin.view.mobile.authentication.LoginController', {
     },
 
     fieldKeyUp: function (field, e) {
-        var btn;
+        var form, btn;
 
         if( e.event.keyCode === 13) {
-            btn = field.up('formpanel').getComponent('loginbtn');
+            form = field.up('formpanel');
+            btn = form && form.query('[submitBtn]');
 
-            !btn.getDisabled() && btn.fireEvent('tap');
+            btn && btn.length === 1 && !btn[0].getDisabled() && btn[0].fireEvent('tap');
         }
     },
 

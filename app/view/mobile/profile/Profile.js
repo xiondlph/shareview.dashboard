@@ -45,11 +45,13 @@ Ext.define('Admin.view.mobile.profile.Profile',{
             }, {
                 name: 'address',
                 label: 'IP Адрес',
+                vtype: 'IPAddress',
                 help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
             }, {
                 xtype: 'button',
                 itemId: 'settingBtn',
                 formBind: true,
+                submitBtn: true,
                 text: 'Сохранить',
                 margin: '20 0 0 0'
             }]
@@ -64,18 +66,21 @@ Ext.define('Admin.view.mobile.profile.Profile',{
                 xtype: 'passwordfield',
                 labelAlign: 'placeholder',
                 autoComplete: false,
-                clearIcon: false
+                allowBlank: false
             },
             items: [{
                 name: 'password',
+                initialPassword: true,
                 label: 'Пароль'
             }, {
                 name: 'confirm',
-                label: 'Подтверждение'
+                label: 'Подтверждение',
+                vtype: 'password'
             }, {
                 xtype: 'button',
                 itemId: 'passwordBtn',
                 formBind: true,
+                submitBtn: true,
                 text: 'Сохранить',
                 margin: '20 0 0 0'
             }]
