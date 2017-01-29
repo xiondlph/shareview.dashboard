@@ -2,7 +2,7 @@ Ext.define('Admin.controller.Main', {
     extend: 'Ext.app.Controller',
 
     requires: [
-        'Admin.ux.Overlay',
+        'Admin.ux.Msg',
         'Admin.view.authentication.Login'
     ],
 
@@ -81,7 +81,11 @@ Ext.define('Admin.controller.Main', {
                 return;
             }
 
-            Admin.Overlay.error();
+            Admin.Msg.show({
+                title: 'Ошибка',
+                message: 'Действие временно недоступно.',
+                buttons: Ext.MessageBox.OK
+            });
         }, this);
     }
 });

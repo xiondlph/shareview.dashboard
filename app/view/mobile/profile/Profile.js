@@ -48,12 +48,18 @@ Ext.define('Admin.view.mobile.profile.Profile',{
                 vtype: 'IPAddress',
                 help: 'В целях безопасности, доступ к системе осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
             }, {
-                xtype: 'button',
-                itemId: 'settingBtn',
-                formBind: true,
-                submitBtn: true,
-                text: 'Сохранить',
-                margin: '20 0 0 0'
+                xtype: 'container',
+                layout: {
+                    type: 'hbox',
+                    pack: 'center'
+                },
+                items: [{
+                    xtype: 'button',
+                    itemId: 'settingBtn',
+                    submitBtn: true,
+                    text: 'Сохранить',
+                    margin: '20 0 0 0'
+                }]
             }]
         }]
     }, {
@@ -77,12 +83,18 @@ Ext.define('Admin.view.mobile.profile.Profile',{
                 label: 'Подтверждение',
                 vtype: 'password'
             }, {
-                xtype: 'button',
-                itemId: 'passwordBtn',
-                formBind: true,
-                submitBtn: true,
-                text: 'Сохранить',
-                margin: '20 0 0 0'
+                xtype: 'container',
+                layout: {
+                    type: 'hbox',
+                    pack: 'center'
+                },
+                items: [{
+                    xtype: 'button',
+                    itemId: 'passwordBtn',
+                    submitBtn: true,
+                    text: 'Сохранить',
+                    margin: '20 0 0 0'
+                }]
             }]
         }]
     }]

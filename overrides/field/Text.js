@@ -22,8 +22,6 @@ Ext.define('Admin.override.field.Text', {
 
     allowBlank: true,
     validateBlank: false,
-    validateOnBlur: true,
-    validateOnChange: true,
     vtype: null,
 
     blankText: 'Поле обязательное для заполнения',
@@ -35,13 +33,27 @@ Ext.define('Admin.override.field.Text', {
 
         this.callParent();
 
-        this.getComponent().on({
-            change: 'onChange',
-            scope: this
-        });
-
         triggers.help.setHandler(this.showHelp);
         triggers.invalid.setHandler(this.showError);
+    },
+
+    applyHelp: function (help) {
+        if (help) {
+            this.getTriggers().help.show();
+        }
+
+        return help;
+    },
+
+    updateValue: function(value, oldValue) {
+        if (oldValue === null && value && this.getLabelAlign() === 'placeholder') {
+            this.animatePlaceholderToLabel();
+        }
+
+        if (!this.wasValid) {
+            this.wasValid = true;
+            this.clearInvalid();
+        }
     },
 
     getErrors: function(value) {
@@ -101,40 +113,12 @@ Ext.define('Admin.override.field.Text', {
         return valid;
     },
 
-    onChange: function (field, value, lastValue) {
-        if (lastValue === null && value && this.getLabelAlign() === 'placeholder') {
-            this.animatePlaceholderToLabel();
-        }
-
-        if (this.validateOnChange && lastValue !== null) {
-            this.validate();
-        }
-    },
-
-    onBlur: function(e) {
-        this.callParent([e]);
-
-        if (this.validateOnBlur) {
-            this.validate();
-        }
-    },
-
     onValidityChange: function (valid) {
         if (valid) {
             this.clearInvalid();
         } else {
             this.markInvalid();
         }
-
-        this.up('formpanel') && this.up('formpanel').fireEvent('validitychange');
-    },
-
-    applyHelp: function (help) {
-        if (help) {
-            this.getTriggers().help.show();
-        }
-
-        return help;
     },
 
     markInvalid: function () {

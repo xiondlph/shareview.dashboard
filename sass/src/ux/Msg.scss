@@ -1,0 +1,15 @@
+@include panel-ui(
+    $ui: 'admin',
+    $header-border-width: 0
+);
+
+@include toolbar-ui(
+    $ui: 'admin',
+    $box-shadow: none
+);
+
+.x-panel-admin {
+    border-radius: 3px;
+    overflow: hidden;
+}
+

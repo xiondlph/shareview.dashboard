@@ -48,15 +48,19 @@ Ext.define('Admin.view.mobile.authentication.Login',{
                 }
             }
         }, {
-            xtype: 'button',
-            itemId: 'loginbtn',
-            formBind: true,
-            submitBtn: true,
-            text: 'Вход',
-            iconAlign: 'right',
-            iconCls: 'x-fa fa-angle-right',
-            ui: 'confirm',
-            margin: '30 0 0 0'
+            xtype: 'container',
+            layout: {
+                type: 'hbox',
+                pack: 'center'
+            },
+            items: [{
+                xtype: 'button',
+                itemId: 'loginbtn',
+                submitBtn: true,
+                text: 'Вход',
+                ui: 'confirm',
+                margin: '30 0 0 0'
+            }]
         }]
     }]
 });

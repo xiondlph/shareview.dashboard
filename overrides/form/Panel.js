@@ -1,70 +1,6 @@
 Ext.define('Admin.override.form.Panel', {
     override: 'Ext.form.Panel',
 
-    initialize : function() {
-        this.callParent();
-        this.on({
-            validitychange: 'checkValidity',
-            scope: this
-        });
-
-        this.onValidityChange(!this.hasInvalidField());
-    },
-
-    hasInvalidField: function() {
-        var fields = this.getFieldsArray(),
-            invalidField;
-
-        invalidField = fields.filter(function (field) {
-            return !field.isValid();
-        });
-
-        return !Ext.isEmpty(invalidField);
-    },
-
-    checkValidity: function() {
-        var valid;
-
-        if (this.destroyed) {
-            return;
-        }
-
-        valid = !this.hasInvalidField();
-        if (valid !== this.wasValid) {
-            this.onValidityChange(valid);
-            this.wasValid = valid;
-        }
-    },
-
-    onValidityChange: function (valid) {
-        var boundItems = this.getBoundItems(),
-            items, i, iLen, cmp;
-
-        if (boundItems) {
-            items = boundItems.items;
-            iLen  = items.length;
-
-            for (i = 0; i < iLen; i++) {
-                cmp = items[i];
-
-                if (!!cmp.getDisabled() === valid) {
-                    cmp.setDisabled(!valid);
-                }
-            }
-        }
-    },
-
-    getBoundItems: function() {
-        var boundItems = this._boundItems;
-
-        if (!boundItems || boundItems.getCount() === 0) {
-            boundItems = this._boundItems = new Ext.util.MixedCollection();
-            boundItems.addAll(this.query('[formBind]'));
-        }
-
-        return boundItems;
-    },
-
     getChanges: function () {
         var fields = this.getFields(),
             changes = {}, props;
@@ -78,14 +14,6 @@ Ext.define('Admin.override.form.Panel', {
         return changes;
     },
 
-    setValues: function(values) {
-        this.callParent([values]);
-
-        this.onValidityChange(!this.hasInvalidField());
-
-        return this;
-    },
-
     isDirty: function () {
         var fields = this.getFieldsArray(),
             dirtyFields;
@@ -97,10 +25,21 @@ Ext.define('Admin.override.form.Panel', {
         return !Ext.isEmpty(dirtyFields);
     },
 
+    validate: function () {
+        var fields = this.getFieldsArray(),
+            invalidFields;
+
+        invalidFields = fields.filter(function (field) {
+            return !field.validate();
+        });
+
+        return Ext.isEmpty(invalidFields);
+    },
+
     submitExt: function (options) {
         var me = this;
 
-        if (!me.isDirty()) {
+        if (!me.isDirty() || !me.validate()) {
             return;
         }
 
