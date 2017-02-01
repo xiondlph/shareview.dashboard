@@ -1,0 +1,21 @@
+@include panel-ui(
+    $ui: 'admin-formpanel',
+    $header-background-color: transparent,
+    $header-font-size: 1.3rem,
+    $header-padding: 10px,
+    $header-color: $color
+);
+
+.x-panel-admin-formpanel {
+    &.responsive {
+        float: left;
+
+        &.big {
+            width: calc(100% - 20px);
+        }
+
+        &.small {
+            width: calc(50% - 40px);
+        }
+    }
+}

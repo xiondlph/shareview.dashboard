@@ -14,7 +14,7 @@ Ext.define('Admin.mixin.Login', {
                 if (data.success) {
                     me.getView().fireEvent('auth', data);
                 } else {
-                    Admin.Overlay.error('Неверные E-mail или пароль');
+                    Admin.Msg.alert('Ошибка', 'Неверные E-mail или пароль');
                 }
             }
         });

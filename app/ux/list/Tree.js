@@ -4,5 +4,5 @@ Ext.define('Admin.ux.list.Tree',{
 
     expanderFirst: false,
     expanderOnly: false,
-    ui: 'nav'
+    ui: 'admin-navigation'
 });

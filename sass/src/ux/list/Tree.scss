@@ -1,10 +1,10 @@
 @include treelist-ui(
-    $ui: 'nav',
+    $ui: 'admin-navigation',
 
-        // Extra padding left/right
+    // Extra padding left/right
     $padding: 0 10px,
 
-        // Black-ish background color
+    // Black-ish background color
     $background-color: #32404e,
     $toolstrip-background-color: #32404e,
 
@@ -14,18 +14,18 @@
     $tool-float-indicator-width: 4px,
     $tool-float-indicator-color: #5fa2dd,
 
-        // Darker background for expanded subtrees
+    // Darker background for expanded subtrees
     $item-expanded-background-color: #2c3845,
 
-        // Taller line height
+    // Taller line height
     $item-line-height : 60px,
 
-        // Off-white text
+    // Off-white text
     $item-icon-color: #ADB3B8,
     $item-expander-color: #ADB3B8,
     $item-text-color: #ADB3B8,
 
-        // Brighter when hovered
+    // Brighter when hovered
     $row-over-background-color: #4f606f,
     $item-icon-over-color: #fff,
     $item-expander-over-color: #fff,
@@ -36,7 +36,7 @@
     $row-indicator-selected-over-color: lighten(#5fa2dd, 10%),
     $row-indicator-over-color: lighten(#5fa2dd, 10%),
 
-        // Various sizes for the pieces:
+    // Various sizes for the pieces:
     $item-icon-font-size: 24px,
     $item-icon-width: 40px,
     $item-expander-font-size: 16px,

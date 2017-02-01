@@ -48,16 +48,4 @@
             height: auto;
         }
     }
-
-    &-form {
-        float: left;
-
-        &.big {
-            width: calc(100% - 20px);
-        }
-
-        &.small {
-            width: calc(50% - 20px);
-        }
-    }
 }

@@ -1,14 +1,14 @@
 @include panel-ui(
-    $ui: 'admin',
+    $ui: 'admin-messagebox',
     $header-border-width: 0
 );
 
 @include toolbar-ui(
-    $ui: 'admin',
+    $ui: 'admin-messagebox',
     $box-shadow: none
 );
 
-.x-panel-admin {
+.x-panel-admin-messagebox {
     border-radius: 3px;
     overflow: hidden;
 }

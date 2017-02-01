@@ -5,6 +5,7 @@ Ext.define('Admin.view.profile.Profile',{
 
     requires: [
         'Ext.layout.Float',
+        'Admin.ux.form.Panel',
         'Admin.view.profile.ProfileController'
     ],
 
@@ -13,23 +14,23 @@ Ext.define('Admin.view.profile.Profile',{
     baseCls: 'admin-dashboard-card-item',
     padding: 10,
     defaults: {
-        margin: 10,
         padding: 10,
-        cls: 'admin-dashboard-form',
-        plugins: 'responsive',
+        responsive: true,
         responsiveConfig: {
             'width <= 800': {
-                userCls: 'big'
+                userCls: 'big',
+                margin: 10
             },
 
             'width > 800': {
-                userCls: 'small'
+                userCls: 'small',
+                margin: 20
             }
         }
     },
 
     items: [{
-        xtype: 'formpanel',
+        xtype: 'admin.formpanel',
         reference: 'setting',
         trackResetOnLoad: true,
         defaults: {
@@ -39,7 +40,7 @@ Ext.define('Admin.view.profile.Profile',{
             clearIcon: false,
             allowBlank: false
         },
-        // title: 'Настройки',
+        title: 'Настройки',
         items: [{
             name: 'email',
             label: 'Email',
@@ -64,16 +65,17 @@ Ext.define('Admin.view.profile.Profile',{
             }]
         }]
     }, {
-        xtype: 'formpanel',
-        allowBlank: false,
+        xtype: 'admin.formpanel',
         reference: 'password',
+        trackResetOnLoad: true,
+        allowBlank: false,
         defaults: {
             xtype: 'passwordfield',
             labelAlign: 'placeholder',
             autoComplete: false,
             allowBlank: false
         },
-        // title: 'Смена пароля',
+        title: 'Смена пароля',
         items: [{
             name: 'password',
             initialPassword: true,

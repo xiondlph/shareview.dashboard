@@ -1,5 +1,20 @@
-Ext.define('Admin.override.form.Panel', {
-    override: 'Ext.form.Panel',
+Ext.define('Admin.ux.form.Panel',{
+    extend: 'Ext.form.Panel',
+    xtype: 'admin.formpanel',
+
+    config: {
+        ui: 'admin-formpanel',
+        responsive: null,
+        plugins: 'responsive'
+    },
+
+    updateResponsive: function (config) {
+        if (config) {
+            this.addCls('responsive');
+        } else {
+            this.removeCls('responsive');
+        }
+    },
 
     getChanges: function () {
         var fields = this.getFields(),

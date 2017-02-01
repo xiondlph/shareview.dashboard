@@ -46,8 +46,12 @@ Ext.define('Admin.override.field.Text', {
     },
 
     updateValue: function(value, oldValue) {
-        if (oldValue === null && value && this.getLabelAlign() === 'placeholder') {
-            this.animatePlaceholderToLabel();
+        if (!this.isFocused && this.getLabelAlign() === 'placeholder') {
+            if (value) {
+                this.animatePlaceholderToLabel();
+            } else {
+                this.animateLabelToPlaceholder();
+            }
         }
 
         if (!this.wasValid) {
@@ -139,6 +143,6 @@ Ext.define('Admin.override.field.Text', {
     },
 
     showHelp: function () {
-        Ext.toast(this.getHelp(), 30000);
+        Admin.Overlay.show({message: this.getHelp()});
     }
 });

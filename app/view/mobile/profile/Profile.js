@@ -2,6 +2,7 @@ Ext.define('Admin.view.mobile.profile.Profile',{
     extend: 'Ext.tab.Panel',
 
     requires: [
+        'Admin.ux.form.Panel',
         'Admin.view.mobile.profile.ProfileController'
     ],
 
@@ -27,7 +28,7 @@ Ext.define('Admin.view.mobile.profile.Profile',{
         title: 'Настройки',
         iconCls: 'x-fa fa-gear',
         items: [{
-            xtype: 'formpanel',
+            xtype: 'admin.formpanel',
             reference: 'setting',
             trackResetOnLoad: true,
             defaults: {
@@ -66,7 +67,7 @@ Ext.define('Admin.view.mobile.profile.Profile',{
         title: 'Пароль',
         iconCls: 'x-fa fa-lock',
         items: [{
-            xtype: 'formpanel',
+            xtype: 'admin.formpanel',
             reference: 'password',
             defaults: {
                 xtype: 'passwordfield',

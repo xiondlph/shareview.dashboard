@@ -4,6 +4,7 @@ Ext.define('Admin.view.authentication.Login',{
 
     requires: [
         'Ext.plugin.Responsive',
+        'Admin.ux.form.Panel',
         'Admin.view.authentication.LoginController'
     ],
 
@@ -25,7 +26,7 @@ Ext.define('Admin.view.authentication.Login',{
         padding: '0 0 10 0',
         html: 'Вход в личный кабинет'
     }, {
-        xtype: 'formpanel',
+        xtype: 'admin.formpanel',
         reference: 'adminLoginForm',
         height: 'auto',
         width: 500,

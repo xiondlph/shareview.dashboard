@@ -2,7 +2,8 @@ Ext.define('Admin.view.mobile.authentication.Login',{
     extend: 'Ext.panel.Panel',
 
     requires: [
-        'Admin.view.mobile.authentication.LoginController',
+        'Admin.ux.form.Panel',
+        'Admin.view.mobile.authentication.LoginController'
     ],
 
     controller: 'mobile-authentication-login',
@@ -15,7 +16,7 @@ Ext.define('Admin.view.mobile.authentication.Login',{
     },
 
     items: [{
-        xtype: 'formpanel',
+        xtype: 'admin.formpanel',
         reference: 'adminLoginForm',
         padding: 10,
         defaults: {
