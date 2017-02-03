@@ -1,7 +1,24 @@
-.x-panel-admin-overlay {
-    border-radius: 3px;
-    overflow: hidden;
-    min-width: 15em;
-    max-width: 90%;
-    max-height: 90%;
+@include panel-ui(
+    $ui: 'admin-overlay',
+    $body-padding: 0 1.3em 1.3em 1.3em,
+    $header-padding: 0.2em 0.2em 0
+);
+
+.x-panel {
+    &-admin-overlay {
+        border-radius: 3px;
+        overflow: hidden;
+        min-width: 15em;
+        max-width: 20em;
+        max-height: 90%;
+    }
+
+    &-header-admin-overlay .x-tool {
+        color: $faded-color;
+        font-size: 1em;
+    }
+
+    &-inner-admin-overlay {
+        overflow-y: auto;
+    }
 }

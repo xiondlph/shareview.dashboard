@@ -32,6 +32,20 @@ Ext.define('Admin.ux.Overlay',{
         }
     },
 
+    initialize: function () {
+        this.callParent();
+
+        this.on('resize', this.onOverlayResize);
+    },
+
+    onOverlayResize: function (cmp) {
+        if (cmp.getHeight() < this.innerElement.getHeight()) {
+            this.setHeight('90%');
+        } else {
+            this.setHeight('auto');
+        }
+    },
+
     applyMessage: function(config) {
         config = {
             html : config,
